@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec2d5f95cbbc5946a09841fb3b61dfa, type: 3}
+  m_Name: Ball
+  m_EditorClassIdentifier: 
+  kind: 2
+  cardName: "\u30DC\u30FC\u30EB"
+  cardTag: 0300000002000000
+  boughtEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 2c39bbce3c960264ba5310cea37973b7, type: 2}
+        m_MethodName: Func
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  cardEffectText: "\u30FB\u8CB7\u308F\u308C\u308B\u6BCE\u306B+10\u306E\u5229\u76CA\u3002<br>\u30FB\u30EC\u30D3\u30E5\u30FC\u30B9\u30BF\u30FC\u3092+3\u500B\u7372\u5F97\u3002"
+  stock: 500
+  mouseOverText: "\u65B0\u54C1\u306E\u30DC\u30FC\u30EB\u3060\u3002\u8272\u3082\u30AB\u30E9\u30D5\u30EB\u3067\u5B50\u4F9B\u306B\u5927\u4EBA\u6C17\u3060\u3002"
+  firstSellInADay: 0
+  firstAmountOfIncrease: 1.02
+  firstAmountOfDecrease: 0.98

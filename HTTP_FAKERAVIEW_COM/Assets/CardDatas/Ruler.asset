@@ -10,8 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ec2d5f95cbbc5946a09841fb3b61dfa, type: 3}
-  m_Name: MAGICAL_ALICE
+  m_Name: Ruler
   m_EditorClassIdentifier: 
+<<<<<<< HEAD:HTTP_FAKERAVIEW_COM/Assets/CardDatas/Ruler.asset
+  kind: 4
+  cardName: "\u5B9A\u898F"
+  cardTag: 05000000
+  cardEffect: {fileID: 0}
+  cardEffectText: 
+  stock: 0
+  mouseOverText: "\u4F55\u306E\u5909\u54F2\u3082\u306A\u3044\u305F\u3060\u306E\u300C\u5B9A\u898F\u300D\u306B\u898B\u3048\u308B\u3002"
+=======
   kind: 0
   cardName: "\u9B54\u6CD5\u5C11\u5973\u30A2\u30EA\u30B9"
   cardTag: 00000000
@@ -34,6 +43,11 @@ MonoBehaviour:
   cardEffectText: "\u5229\u76CA\u304C1\u5897\u3048\u307E\u3059\u3002"
   stock: 1000
   mouseOverText: "\u30D5\u30A3\u30AF\u30B7\u30E7\u30F3\u3067\u3059\u3002"
+<<<<<<< HEAD:HTTP_FAKERAVIEW_COM/Assets/CardDatas/Ruler.asset
+  FirstSellInADay: 1
+>>>>>>> 9cb60c29c387a9741d62f9f69f2a41e1ba9661c5:HTTP_FAKERAVIEW_COM/Assets/CardDatas/MAGICAL_ALICE.asset
+=======
   firstSellInADay: 1
   firstAmountOfIncrease: 0
   firstAmountOfDecrease: 0
+>>>>>>> a16c2920fc4aaa01724bbd6b905423ea0ac759ba:HTTP_FAKERAVIEW_COM/Assets/CardDatas/MAGICAL_ALICE.asset
