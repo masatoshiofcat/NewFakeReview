@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec2d5f95cbbc5946a09841fb3b61dfa, type: 3}
+  m_Name: Eraser
+  m_EditorClassIdentifier: 
+  kind: 4
+  cardName: "\u6D88\u3057\u30B4\u30E0"
+  cardTag: 05000000
+  cardEffect: {fileID: 0}
+  cardEffectText: "\u30FB\u8CB7\u308F\u308C\u308B\u6BCE\u306B-50\u306E\u640D\u76CA\u3002<br>\u30FB\u8CFC\u5165\u6642\u306B\u4ED6\u306E\u5546\u54C1\u306F\u9078\u629E\u753B\u9762\u304B\u3089\u6D88\u3048\u308B\u3002"
+  stock: 50
+  mouseOverText: "\u4F55\u306E\u5909\u54F2\u3082\u306A\u3044\u305F\u3060\u306E\u300C\u6D88\u3057\u30B4\u30E0\u300D\u306B\u898B\u3048\u308B\u3002"

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec2d5f95cbbc5946a09841fb3b61dfa, type: 3}
+  m_Name: Compass
+  m_EditorClassIdentifier: 
+  kind: 4
+  cardName: "\u30B3\u30F3\u30D1\u30B9"
+  cardTag: 05000000
+  cardEffect: {fileID: 0}
+  cardEffectText: "\u30FB\u6B21\u306B\u30EC\u30D3\u30E5\u30FC\u3059\u308B\u6642\u3001\u6D88\u8CBB\u30EC\u30D3\u30E5\u30FC\u30B9\u30BF\u30FC\u304C0\u306B\u306A\u308B\u3002 "
+  stock: 0
+  mouseOverText: "\u4F55\u306E\u5909\u54F2\u3082\u306A\u3044\u305F\u3060\u306E\u300C\u30B3\u30F3\u30D1\u30B9\u300D\u306B\u898B\u3048\u308B\u3002 "
