@@ -12,14 +12,14 @@ public class CardDataBase : ScriptableObject
     [SerializeField]
     private List<CardData> cardDataList = new List<CardData>();
 
+
+    [SerializeField]
+    List<CardData> test = new List<CardData>(1);
+
     /// <summary>
-    /// カードのデータリストの取得
+    /// Getter & Setter
     /// </summary>
-    /// <returns></returns>
-    public List<CardData> GetCardDataList()
-    {
-        return this.cardDataList;
-    }
+    public List<CardData> CardDatas { get { return this.cardDataList; } set { this.cardDataList = value; } }
 
     /// <summary>
     /// リスト内にあるカードデータを一つランダムに取得する
@@ -41,27 +41,25 @@ public class CardDataBase : ScriptableObject
         {
             CardData card = this.cardDataList[i];
 
-            if (card.GetCardEffect() == null)
+            if (card.CardEffects == null)
             {
                 Debug.Log("効果スクリプトがない！index="+i.ToString());
             }
 
-            if(card.GetCardEffectText() == "")
+            if(card.CardEffectText == "")
             {
                 Debug.Log("効果説明が無記入!index="+i.ToString());
             }
 
-            if(card.GetCardName() == "")
+            if(card.CardName == "")
             {
                 Debug.Log("商品名が無記入!index="+i.ToString());
             }
 
-            if(card.GetStock() <=0)
+            if(card.Stock <=0)
             {
                 Debug.Log("在庫数のパラメータエラー!index=" + i.ToString());
             }
-
-            
         }
     }
 

@@ -57,8 +57,8 @@ public class CardGenerator : MonoBehaviour
         //カードの実体を生成
         GameObject card =  Instantiate(this.cardFrame);
         //カードのパラメータを設定する
-        card.GetComponent<CardBase>().CardInitialize(cardData.GetCardName(), cardData.GetCardEffectText(), cardData.GetStock(), cardData.GetCardEffect(), GetIconSpriteFromCardKind(cardData)
-            ,cardData.GetFirstSellInADay(),cardData.GetFirstAmountOfIncrease(),cardData.GetFirstAmountOfDecrease());
+        card.GetComponent<CardBase>().CardInitialize(cardData.CardName, cardData.CardEffectText, cardData.Stock, cardData.CardEffects, GetIconSpriteFromCardKind(cardData)
+            ,cardData.FirstSellInADay,cardData.FirstAmountOfIncrease,cardData.FirstAmountOfDecrease);
 
         //!カードの座標を決定
         card.transform.position = DecisionCardPosition(i);
@@ -90,7 +90,7 @@ public class CardGenerator : MonoBehaviour
     /// <returns></returns>
     private Sprite GetIconSpriteFromCardKind(CardData cardData)
     {
-        return cardIcons[(int)cardData.GetKind()];
+        return cardIcons[(int)cardData.CardKind];
     }
 
 }

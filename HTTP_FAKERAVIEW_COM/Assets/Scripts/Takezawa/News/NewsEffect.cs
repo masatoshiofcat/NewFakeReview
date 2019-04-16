@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 
 [Serializable]
-[CreateAssetMenu(fileName = "effects", menuName = "EffectData")]
+[CreateAssetMenu(fileName = "effects", menuName = "NewsEffectData")]
 public class NewsEffect : NewsEffectBase
 {
      public enum FLUCTUATION

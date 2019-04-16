@@ -29,7 +29,7 @@ public class CardData : ScriptableObject
     private string cardName;//商品名
 
     [SerializeField]
-    private TagOfCard[] cardTag;//商品についているタグ
+    private List<TagOfCard> cardTag;//商品についているタグ
 
     [SerializeField]
     private UnityEngine.Events.UnityEvent boughtEvents = new UnityEngine.Events.UnityEvent();
@@ -52,99 +52,26 @@ public class CardData : ScriptableObject
 
 
     /// <summary>
-    /// 商品の種類の取得
+    /// Getter & Setter
     /// </summary>
-    /// <returns></returns>
-    public KindOfCard GetKind()
-    {
-        return this.kind;
-    }
+    public KindOfCard CardKind { get { return this.kind; }set { this.kind = value; } }        // 商品の種類　取得＆設定
+    public string CardName { get { return this.cardName; } set { this.cardName = value; } }   // カードの名前　取得＆設定
+    public List<TagOfCard> CardTags { get { return this.cardTag; }set { this.cardTag = value; } }     // カードについてるタグ　取得＆設定
+    public UnityEngine.Events.UnityEvent CardEffects { get { return this.boughtEvents; }set { this.boughtEvents = value; } }    // カードの効果スクリプト 取得＆設定
+    public string CardEffectText { get { return this.cardEffectText; }set { this.cardEffectText = value; } } // カードの効果説明文　取得＆設定
+    public int Stock { get { return this.stock; }set { this.stock = value; } }  // 商品の在庫数 取得＆設定
+    public string MouseOver { get { return this.mouseOverText; } set { this.mouseOverText = value; } }  // マウスが上に乗った時表示される文字列　取得＆設定
+    public float FirstSellInADay { get { return this.firstSellInADay; }set { this.firstSellInADay = value; } }  // 一日当たり売れる量の初期値　取得＆設定
+    public float FirstAmountOfIncrease { get { return this.firstAmountOfIncrease; } set { this.firstAmountOfIncrease = value; } }   //評価した時sellInADay増加量の初期値　取得＆設定
+    public float FirstAmountOfDecrease { get { return this.firstAmountOfDecrease; } set { this.firstAmountOfDecrease = value; } }   // 評価した時sellInADay減少量の初期値　取得＆設定
 
-    /// <summary>
-    /// 商品名の取得
-    /// </summary>
-    /// <returns></returns>
-    public String GetCardName()
-    {
-        return this.cardName;
-    }
-
-    /// <summary>
-    /// 商品についているタグの取得
-    /// </summary>
-    /// <returns></returns>
-    public TagOfCard[] GetCardTag()
-    {
-        return this.cardTag;
-    }
-
-    /// <summary>
-    /// カードの効果スクリプトの取得
-    /// </summary>
-    /// <returns></returns>
-    public UnityEngine.Events.UnityEvent GetCardEffect()
-    {
-        return this.boughtEvents;
-    }
-
-    /// <summary>
-    /// カードの効果説明文の取得
-    /// </summary>
-    /// <returns></returns>
-    public string GetCardEffectText()
-    {
-        return this.cardEffectText;
-    }
-    /// <summary>
-    /// 商品の在庫数の取得
-    /// </summary>
-    /// <returns></returns>
-    public int GetStock()
-    {
-        return this.stock;
-    }
-
-
-
-    /// <summary>
-    /// マウスが上に乗った時表示される文字列の取得
-    /// </summary>
-    public string GetMouseOverString()
-    {
-        return this.mouseOverText;
-    }
-
-    /// <summary>
-    /// 一日当たり売れる量の初期値を返す
-    /// </summary>
-    /// <returns></returns>
-    public float GetFirstSellInADay()
-    {
-        return this.firstSellInADay;
-    }
-
-    /// <summary>
-    /// //評価した時sellInADay増加量の初期値
-    /// </summary>
-    /// <returns></returns>
-    public float GetFirstAmountOfIncrease()
-    {
-        return this.firstAmountOfIncrease;
-    }
-
-    /// <summary>
-    /// 評価した時sellInADay減少量の初期値
-    /// </summary>
-    public float GetFirstAmountOfDecrease()
-    {
-        return this.firstAmountOfDecrease;
-    }
 
     public void Func()
     {
         Debug.Log("うれました");
 
     }
+
 
 
 }

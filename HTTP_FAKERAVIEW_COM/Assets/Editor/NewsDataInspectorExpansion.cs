@@ -25,8 +25,14 @@ public class NewsDataInspectorExpansion : Editor
 
         // ターゲット
         // 折り畳み表示
-        if (folding = EditorGUILayout.Foldout(folding, "Target"))
+
+        EditorGUILayout.BeginHorizontal();
+        folding = EditorGUILayout.Foldout(folding, "Target");
+        //data.Target. = EditorGUILayout.IntField(data.Target.Count);
+        EditorGUILayout.EndHorizontal();
+        if (folding)
         {
+
             // リストの表示
             for (int i = 0; i < data.Target.Count; i++)
             {
