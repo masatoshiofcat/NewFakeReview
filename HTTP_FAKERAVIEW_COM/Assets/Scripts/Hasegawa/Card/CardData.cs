@@ -45,10 +45,6 @@ public class CardData : ScriptableObject
 
     [SerializeField]
     private float firstSellInADay;//一日当たり売れる量の初期値
-    [SerializeField]
-    private float firstAmountOfIncrease = 1.02f;//評価した時sellInADay増加量の初期値
-    [SerializeField]
-    private float firstAmountOfDecrease = 0.98f;//評価した時sellInADay減少量の初期値
 
 
     /// <summary>
@@ -123,27 +119,10 @@ public class CardData : ScriptableObject
         return this.firstSellInADay;
     }
 
-    /// <summary>
-    /// //評価した時sellInADay増加量の初期値
-    /// </summary>
-    /// <returns></returns>
-    public float GetFirstAmountOfIncrease()
-    {
-        return this.firstAmountOfIncrease;
-    }
-
-    /// <summary>
-    /// 評価した時sellInADay減少量の初期値
-    /// </summary>
-    public float GetFirstAmountOfDecrease()
-    {
-        return this.firstAmountOfDecrease;
-    }
 
     public void Func()
     {
         Debug.Log("うれました");
-
     }
 
 

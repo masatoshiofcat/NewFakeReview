@@ -39,8 +39,7 @@ public class CardBase : MonoBehaviour
 
     private float sellInADay;//一日当たり売れる量
     private float sellInATemp;//sellInADayの余剰分を記録しておく
-    private float amountOfIncrease;// 評価した時sellInADayの増加量
-    private float amountOfDecrease;// 評価した時sellInADayの減少量
+
 
 
     // Start is called before the first frame update
@@ -111,7 +110,7 @@ public class CardBase : MonoBehaviour
     /// <param name="effect"></param>カードの効果を記述したクラス
     /// <param name="tex"></param>アイコン画像
     public void CardInitialize(string nameText,string effectText,int maxStock, UnityEngine.Events.UnityEvent effect,Sprite tex,
-        float firstSellInADay,float firstAmountOfIncrease,float firstAmountOfDecrease)
+        float firstSellInADay)
     {
         this.SetNameText(nameText);
         this.SetCardEffectText(effectText);
@@ -119,8 +118,6 @@ public class CardBase : MonoBehaviour
         this.SetCardEffect(effect);
         this.SetCardIconImage(tex);
         this.SetSellInADay(firstSellInADay);
-        this.SetAmountOfIncrease(firstAmountOfIncrease);
-        this.SetAmountOfDecrease(firstAmountOfDecrease);
     }
    
     /// <summary>
@@ -206,61 +203,6 @@ public class CardBase : MonoBehaviour
     }
 
     /// <summary>
-    /// 評価した時sellInADayの増加量の設定
-    /// </summary>
-    /// <param name="val"></param>
-    public void SetAmountOfIncrease(float val)
-    {
-        this.amountOfIncrease = val;
-    }
-
-    /// <summary>
-    /// 評価した時sellInADayの増加量の増減
-    /// </summary>
-    /// <param name="val"></param>
-    public void AddAmountOfIncrease(float val)
-    {
-        this.amountOfIncrease += val;
-    }
-
-    /// <summary>
-    /// 評価した時sellInADayの増加量の取得
-    /// </summary>
-    /// <returns></returns>
-    public float GetAmountOfIncrease()
-    {
-        return this.amountOfIncrease;
-    }
-
-    /// <summary>
-    /// 評価した時sellInADayの減少量の設定
-    /// </summary>
-    /// <param name="val"></param>
-    public void SetAmountOfDecrease(float val)
-    {
-        this.amountOfDecrease = val;
-    }
-
-    /// <summary>
-    /// 評価した時sellInADayの減少量の増減
-    /// </summary>
-    /// <param name="val"></param>
-    public void AddAmountOfDecrease(float val)
-    {
-        this.amountOfDecrease += val;
-    }
-
-    /// <summary>
-    /// 評価した時sellInADayの減少量の取得
-    /// </summary>
-    /// <param name="val"></param>
-    /// <returns></returns>
-    public float GetAmountOfDecrease()
-    {
-        return this.amountOfDecrease;
-    }
-
-    /// <summary>
     /// カードが選択中かを取得する
     /// </summary>
     public bool GetIsChosen()
@@ -333,10 +275,10 @@ public class CardBase : MonoBehaviour
         this.currentStock += temp;
 
         //売れた数を表示する
-      //  Text fadeText = Instantiate(fadeUpText);
-    //    fadeText.transform.parent = currentStockText.transform.parent;
-  //      fadeText.transform.position = currentStockText.transform.position;
-//        fadeText.text = "  +"+temp.ToString();
+        Text fadeText = Instantiate(fadeUpText);
+        fadeText.transform.parent = currentStockText.transform.parent;
+        fadeText.transform.position = currentStockText.transform.position;
+        fadeText.text = "  +" + temp.ToString();
 
         //売り切れの処理
         if (currentStock >= this.maxStock)

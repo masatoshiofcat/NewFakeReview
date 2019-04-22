@@ -16,7 +16,7 @@ public class teruCardEffect : MonoBehaviour
     private void BallEffect2()
     {
         // レビュースターを増やす処理(＋を付けてるのは見やすさのため)
-        CompanyInfomation.Instance.AddStarNum(+3);
+       // CompanyInfomation.Instance.AddStarNum(+3);
     }
     // 消しゴムの効果１
     private void EraserEffect1()
@@ -80,7 +80,7 @@ public class teruCardEffect : MonoBehaviour
     private void SuspiciousMothEffect2()
     {
         // 信憑性を減らす処理
-        CompanyInfomation.Instance.AddCurrentConfidence(-10);
+       // CompanyInfomation.Instance.AddCurrentConfidence(-10);
     }
     // コンパスの効果１
     private void CompassEffect1()
@@ -96,6 +96,6 @@ public class teruCardEffect : MonoBehaviour
     private void ReferenceBookEffect1()
     {
         // 信憑性を増やす処理(＋を付けてるのは見やすさのため)
-        CompanyInfomation.Instance.AddCurrentConfidence(+1);
+       // CompanyInfomation.Instance.AddCurrentConfidence(+1);
     }
 }

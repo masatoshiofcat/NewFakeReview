@@ -19,56 +19,43 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     private Text dayLeftTextObject;
 
     [SerializeField]
-    private float SECOUND_IN_A_DAY =6;//1日の秒数
-
-    [SerializeField]
-    private int currentConfidence = 3;//信用
-    [SerializeField]
-    private int currentStar = 10;//☆
-
-    [SerializeField]
-    private Text starNumText;//☆の数を書くためのテキスト
-
-    [SerializeField]
-    private Text confidenceNumText;//信憑性を書くためのテキスト
+    private float SECOUND_IN_A_DAY = 6;//1日の秒数
 
     [SerializeField]
     private Text marginText;//利益を書くためのテキスト
 
+
     private int dayElapsed = 0;//経過日数
-    private int companyMargin=0;//総利益
+    private int companyMargin = 0;//総利益
 
     private CardBase[] cardsOnWindow = new CardBase[6];//表示されているカード
     private CardBase currentChosenCard;//現在選択中のカード
 
-    private float currentTimeCount=0;//時を進めるためのタイマー
+
+
+    private float currentTimeCount = 0;//時を進めるためのタイマー
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         //一日を経過させる
-        if(this.currentTimeCount > this.SECOUND_IN_A_DAY)
+        if (this.currentTimeCount > this.SECOUND_IN_A_DAY)
         {
             //一日の勘定をし、次の日を迎える
             GreetTheNextDay();
             //タイマーのリセット
             this.currentTimeCount = 0;
         }
-        //残り日数表示の更新
-        this.dayLeftTextObject.text = "あと" + this.dayLeft.ToString() + "日";
-        //☆数の更新
-        this.starNumText.text = "x" + this.currentStar.ToString();
-        //信憑性の更新
-        this.confidenceNumText.text = "+" + this.currentConfidence.ToString();
-        //利益の更新
-        this.marginText.text = this.companyMargin.ToString() + "円";
+
+        //テキストの更新
+        this.UpdateText();
 
         //タイマーを進める
         this.currentTimeCount += Time.deltaTime;
@@ -80,17 +67,24 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     public void GreetTheNextDay()
     {
         //商品を売る処理
-        for(int i=0;i<this.cardsOnWindow.Length;i++)
+        for (int i = 0; i < this.cardsOnWindow.Length; i++)
         {
             this.cardsOnWindow[i].EndOfTheDay();
         }
-        //レビュー☆の回復
-        this.currentStar += this.currentConfidence;
         //日にちの経過
         this.dayElapsed++;
         this.dayLeft--;
     }
 
+    //テキスト描画情報の更新
+    private void UpdateText()
+    {
+        //残り日数表示の更新
+        this.dayLeftTextObject.text = "あと" + this.dayLeft.ToString() + "日";
+        //利益の更新
+        this.marginText.text = this.companyMargin.ToString() + "円";
+
+    }
 
     //GetterとSetterの数々=================================================
 
@@ -181,56 +175,5 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
         this.currentChosenCard = card;
     }
 
-    /// <summary>
-    /// 信頼度の取得
-    /// </summary>
-    /// <returns></returns>
-    public int GetCurrentConfidence()
-    {
-        return this.currentConfidence;
-    }
-
-    /// <summary>
-    /// 信頼度の設定
-    /// </summary>
-    /// <param name="val"></param>
-    public void SetCurrentConfidence(int val)
-    {
-        this.currentConfidence = val;
-    }
-
-    /// <summary>
-    /// 信頼度の増減
-    /// </summary>
-    /// <param name="val"></param>
-    public void AddCurrentConfidence(int val)
-    {
-        this.currentConfidence += val;
-    }
-
-    /// <summary>
-    /// スター数の取得
-    /// </summary>
-    /// <returns></returns>
-    public int GetStarNum()
-    {
-        return this.currentStar;
-    }
-    /// <summary>
-    /// スター数の設定
-    /// </summary>
-    /// <param name="val"></param>
-    public void SetStarNum(int val)
-    {
-        this.currentStar = val;
-    }
-    /// <summary>
-    /// スター数の増減
-    /// </summary>
-    /// <param name="val"></param>
-    public void AddStarNum(int val)
-    {
-        this.currentStar += val;
-    }
 
 }
