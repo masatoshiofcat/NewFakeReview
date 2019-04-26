@@ -22,10 +22,13 @@ public class CardBase : MonoBehaviour
     private Text currentStockText;//現在の在庫数を書くためのTextオブジェクト
 
     [SerializeField]
+    private Text mouseOverText;//マウスがアイコンの上に乗った時表示されるヒントを書くためのオブジェクト
+
+    [SerializeField]
     private SpriteRenderer cardIcon;//アイコン画像を変更するためのオブジェクト
 
     [SerializeField]
-    private Text fadeUpText;//+n と上昇していく、売れた個数を表すテキスト
+    private FadeUpText fadeUpText;//+n と上昇していく、売れた個数を表すテキスト
 
     [SerializeField]
     private Color selectedColor;//選択中の色
@@ -39,8 +42,6 @@ public class CardBase : MonoBehaviour
 
     private float sellInADay;//一日当たり売れる量
     private float sellInATemp;//sellInADayの余剰分を記録しておく
-
-
 
     // Start is called before the first frame update
     private void Start()
@@ -109,17 +110,66 @@ public class CardBase : MonoBehaviour
     /// <param name="maxStock"></param>カードの在庫数
     /// <param name="effect"></param>カードの効果を記述したクラス
     /// <param name="tex"></param>アイコン画像
-    public void CardInitialize(string nameText,string effectText,int maxStock, UnityEngine.Events.UnityEvent effect,Sprite tex,
+    public void CardInitialize(string nameText,string effectText,string mouseText, int maxStock, UnityEngine.Events.UnityEvent effect,Sprite tex,
         float firstSellInADay)
     {
         this.SetNameText(nameText);
         this.SetCardEffectText(effectText);
+        this.SetMouseOverText(mouseText);
         this.SetMaxStock(maxStock);
         this.SetCardEffect(effect);
         this.SetCardIconImage(tex);
         this.SetSellInADay(firstSellInADay);
+
+        //ヒントのみ最初は表示しない
+        this.mouseOverText.enabled = false;
     }
-   
+
+    /// <summary>
+    /// カードが売れたときの処理
+    /// </summary>
+    public void OnBoughtCard()
+    {
+        //登録してあるメソッドを行う
+        boughtEvent.Invoke();
+    }
+
+    /// <summary>
+    /// 一日の終わりの処理を記述。
+    /// 売れたか売れないかの処理を行う。
+    /// </summary>
+    public void EndOfTheDay()
+    {
+        //1日当たり売れる量がマイナスの場合、処理しない
+        if (this.sellInADay < 0) return;
+        //一日当たり売れる量の増加
+        this.sellInATemp += this.sellInADay;
+        //整数の取得
+        int temp = (int)sellInATemp;
+        //売れた分だけ売れたときの処理を行う
+        for (int i = 0; i < temp; i++)
+        {
+            OnBoughtCard();
+        }
+        //小数点以下のみ記録
+        sellInATemp -= temp;
+        //売れた個数を記録
+        this.currentStock += temp;
+
+        //売れた数を表示する
+        this.fadeUpText.SetText("+" + temp.ToString());
+        this.fadeUpText.StartRising();
+
+        //売り切れの処理
+        if (currentStock >= this.maxStock)
+        {
+
+        }
+
+        //表示個数の設定
+        this.currentStockText.text = this.currentStock.ToString();
+    }
+
     /// <summary>
     /// カードの表示名を設定するための関数
     /// </summary>
@@ -138,6 +188,16 @@ public class CardBase : MonoBehaviour
         effectText.Replace("<br>", "\n");
         this.effectText.text = effectText;
     }
+
+    /// <summary>
+    /// マウスが上に乗った時表示されるヒントを設定するための関数
+    /// </summary>
+    /// <param name="effectText"></param>
+    public void SetMouseOverText(string mouseText)
+    {
+        this.mouseOverText.text = mouseText;
+    }
+
 
     /// <summary>
     /// 現在在庫数の表記を設定するための関数
@@ -242,51 +302,4 @@ public class CardBase : MonoBehaviour
         return this.currentStock;
     }
 
-
-    /// <summary>
-    /// カードが売れたときの処理
-    /// </summary>
-    public void OnBoughtCard()
-    {
-        //登録してあるメソッドを行う
-        boughtEvent.Invoke();
-    }
-
-    /// <summary>
-    /// 一日の終わりの処理を記述。
-    /// 売れたか売れないかの処理を行う。
-    /// </summary>
-    public void EndOfTheDay()
-    {
-        //1日当たり売れる量がマイナスの場合、処理しない
-        if (this.sellInADay < 0) return;
-        //一日当たり売れる量の増加
-        this.sellInATemp += this.sellInADay;
-        //整数の取得
-        int temp = (int)sellInATemp;
-        //売れた分だけ売れたときの処理を行う
-        for(int i=0;i<temp;i++)
-        {
-            OnBoughtCard();
-        }
-        //小数点以下のみ記録
-        sellInATemp -= temp;
-        //売れた個数を記録
-        this.currentStock += temp;
-
-        //売れた数を表示する
-        Text fadeText = Instantiate(fadeUpText);
-        fadeText.transform.parent = currentStockText.transform.parent;
-        fadeText.transform.position = currentStockText.transform.position;
-        fadeText.text = "  +" + temp.ToString();
-
-        //売り切れの処理
-        if (currentStock >= this.maxStock)
-        {
-
-        }
-
-        //表示個数の設定
-        this.currentStockText.text = this.currentStock.ToString();
-    }
 }

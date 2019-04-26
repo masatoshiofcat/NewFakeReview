@@ -35,17 +35,16 @@ public class CardData : ScriptableObject
     private UnityEngine.Events.UnityEvent boughtEvents = new UnityEngine.Events.UnityEvent();
 
     [SerializeField]
-    private string cardEffectText;//カードに書かれる、効果の説明
-
-    [SerializeField]
-    private int stock; //在庫数
-
-    [SerializeField]
-    private string mouseOverText;//マウスが上に乗った時表示されるヒント
+    private int stock;//在庫数
 
     [SerializeField]
     private float firstSellInADay;//一日当たり売れる量の初期値
 
+    [SerializeField,Multiline(3)]
+    private string cardEffectText;//カードに書かれる、効果の説明
+
+    [SerializeField,Multiline(3)]
+    private string mouseOverText;//マウスが上に乗った時表示されるヒント
 
     /// <summary>
     /// 商品の種類の取得

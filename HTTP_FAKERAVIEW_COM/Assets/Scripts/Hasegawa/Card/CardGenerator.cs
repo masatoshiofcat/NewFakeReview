@@ -57,7 +57,7 @@ public class CardGenerator : MonoBehaviour
         //カードの実体を生成
         GameObject card =  Instantiate(this.cardFrame);
         //カードのパラメータを設定する
-        card.GetComponent<CardBase>().CardInitialize(cardData.GetCardName(), cardData.GetCardEffectText(), cardData.GetStock(), cardData.GetCardEffect(), GetIconSpriteFromCardKind(cardData)
+        card.GetComponent<CardBase>().CardInitialize(cardData.GetCardName(), cardData.GetCardEffectText(),cardData.GetMouseOverString(), cardData.GetStock(), cardData.GetCardEffect(), GetIconSpriteFromCardKind(cardData)
             ,cardData.GetFirstSellInADay());
 
         //!カードの座標を決定

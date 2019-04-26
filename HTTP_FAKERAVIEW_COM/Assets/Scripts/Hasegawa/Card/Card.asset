@@ -18,7 +18,7 @@ MonoBehaviour:
   boughtEvents:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: b843083aae41fb342a6206e7d50dfe0c, type: 2}
+      - m_Target: {fileID: 11400000, guid: 8cc3080fd68bece4f8644249bee6c6fd, type: 2}
         m_MethodName: Func
         m_Mode: 1
         m_Arguments:
@@ -31,7 +31,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  cardEffectText: 
   stock: 0
+  firstSellInADay: 0
+  cardEffectText: 
   mouseOverText: 
-  FirstSellInADay: 0
