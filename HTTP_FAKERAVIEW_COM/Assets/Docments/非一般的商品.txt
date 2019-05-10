@@ -1,0 +1,39 @@
+非一般的商品
+
+麻薬 [DRAG]
+注射器[DRAG,STAB]
+
+
+核
+同人誌（R指定）
+　・あかまむし
+　・すっぽんエキス
+武器
+　・バールのようなもの
+　・エクスカリバー [WEAPON,DANGER,STAB]
+　・
+奴隷
+　・長谷川　雅季 [SLAVE]
+
+スイス
+
+
+
+STATIONARY（文房具）
+SPORTS（すぽーつ）
+PETS（ペット用品）
+EAT（食べ物）
+DRINK（飲み物）
+HOBBY（娯楽）
+WEAR（衣類）
+MEDICAL（医療品）
+RIDE（乗り物）
+TOOL（道具・工業用品）
+NEW CLEAR(核)
+SLAVE（奴隷）
+WEAPON（武器）
+SWITZERLAND(スイス)
+
+
+
+
