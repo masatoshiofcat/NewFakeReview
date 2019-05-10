@@ -40,6 +40,9 @@ public class CardData : ScriptableObject
     [SerializeField]
     private float firstSellInADay;//一日当たり売れる量の初期値
 
+    [SerializeField]
+    private int price;//価格
+
     [SerializeField,Multiline(3)]
     private string cardEffectText;//カードに書かれる、効果の説明
 
@@ -99,8 +102,6 @@ public class CardData : ScriptableObject
         return this.stock;
     }
 
-
-
     /// <summary>
     /// マウスが上に乗った時表示される文字列の取得
     /// </summary>
@@ -118,10 +119,13 @@ public class CardData : ScriptableObject
         return this.firstSellInADay;
     }
 
-
-    public void Func()
+    /// <summary>
+    /// 価格を返す
+    /// </summary>
+    /// <returns></returns>
+    public int GetPrice()
     {
-        Debug.Log("うれました");
+        return this.price;
     }
 
 

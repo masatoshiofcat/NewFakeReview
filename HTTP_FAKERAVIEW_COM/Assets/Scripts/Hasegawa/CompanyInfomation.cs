@@ -24,6 +24,8 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     [SerializeField]
     private Text marginText;//利益を書くためのテキスト
 
+    [SerializeField]
+    CardGenerator cardGenerator;//カード生成器
 
     private int dayElapsed = 0;//経過日数
     private int companyMargin = 0;//総利益
@@ -39,7 +41,9 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     // Start is called before the first frame update
     void Start()
     {
-        
+        //カードに空きがあれば作成する
+        this.cardGenerator.CardGenerate();
+
     }
 
     // Update is called once per frame
@@ -48,7 +52,7 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
         //一日を経過させる
         if (this.currentTimeCount > this.SECOUND_IN_A_DAY)
         {
-            //一日の勘定をし、次の日を迎える
+            //一日毎起こるイベントの処理
             GreetTheNextDay();
             //タイマーのリセット
             this.currentTimeCount = 0;
@@ -66,11 +70,17 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     /// </summary>
     public void GreetTheNextDay()
     {
+        //カードに空きがあれば作成する
+        this.cardGenerator.CardGenerate();
         //商品を売る処理
         for (int i = 0; i < this.cardsOnWindow.Length; i++)
         {
+            //カードがそこに存在していなければ処理しない
+            if (this.cardsOnWindow[i] == null) continue;
+            //商品を売る
             this.cardsOnWindow[i].EndOfTheDay();
         }
+
         //日にちの経過
         this.dayElapsed++;
         this.dayLeft--;

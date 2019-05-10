@@ -34,7 +34,7 @@ public class CardGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CardGenerate();
+
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ public class CardGenerator : MonoBehaviour
         GameObject card =  Instantiate(this.cardFrame);
         //カードのパラメータを設定する
         card.GetComponent<CardBase>().CardInitialize(cardData.GetCardName(), cardData.GetCardEffectText(),cardData.GetMouseOverString(), cardData.GetStock(), cardData.GetCardEffect(), GetIconSpriteFromCardKind(cardData)
-            ,cardData.GetFirstSellInADay());
+            ,cardData.GetFirstSellInADay(),cardData.GetPrice());
 
         //!カードの座標を決定
         card.transform.position = DecisionCardPosition(i);

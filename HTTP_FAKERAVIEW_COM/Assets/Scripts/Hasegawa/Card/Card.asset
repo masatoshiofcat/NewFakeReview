@@ -18,8 +18,8 @@ MonoBehaviour:
   boughtEvents:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 8cc3080fd68bece4f8644249bee6c6fd, type: 2}
-        m_MethodName: Func
+      - m_Target: {fileID: 11400000, guid: 2816dd2778fe7574dae7d42b008f1b5a, type: 2}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -9,6 +9,13 @@ using UnityEngine.UI;
 /// </summary>
 public class CardBase : MonoBehaviour
 {
+    enum CardState
+    {
+        APPERARANCE, //登場
+        SELLING,//販売中
+        SOLDOUT,//売り切れの時の処理
+    }
+
     [SerializeField]
     private Text nameText; //商品名を書くためのTextオブジェクト
 
@@ -33,26 +40,63 @@ public class CardBase : MonoBehaviour
     [SerializeField]
     private Color selectedColor;//選択中の色
 
+    [SerializeField]
+    private LerpSprite soldOutImage;//売り切れの時表示する画像
+
     private UnityEngine.Events.UnityEvent boughtEvent;//商品が買われたときの効果を記述したクラス
 
     private int currentStock;//現在までに売れた個数
     private int maxStock;//在庫数
+    private int price;//価格
 
     private bool isSelected=false;//このカードが選択中かのフラグ
 
     private float sellInADay;//一日当たり売れる量
     private float sellInATemp;//sellInADayの余剰分を記録しておく
 
+    CardState currentState;//現在の状態
+
     // Start is called before the first frame update
     private void Start()
     {
-        
+        //最初は登場から
+        currentState = CardState.SELLING;
     }
 
     /// <summary>
     /// 更新処理
     /// </summary>
     private void Update()
+    {
+        switch (this.currentState)
+        {
+            case CardState.APPERARANCE:
+                this.ExecuteAppearance();
+                break;
+            case CardState.SELLING:
+                this.ExecuteSelling();
+                break;
+            case CardState.SOLDOUT:
+                this.ExecuteSoldOut();
+                break;
+             default:
+                break;
+        }
+
+    }
+
+    /// <summary>
+    /// 登場時の処理
+    /// </summary>
+    private void ExecuteAppearance()
+    {
+
+    }
+
+    /// <summary>
+    /// 販売中の処理
+    /// </summary>
+    private void ExecuteSelling()
     {
         //マウスと接触しているかの判定
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -61,28 +105,33 @@ public class CardBase : MonoBehaviour
         if (hitData)
         {
             //重なっているときクリックされたら選択中の切り替え
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
-                if(hitData.collider.gameObject == gameObject)
+                if (hitData.collider.gameObject == gameObject)
                 {
-                    Debug.Log("hit=" + gameObject.name);
-
                     SwitchChosenCard();
                 }
 
             }
         }
 
-
         //選択中であれば色を変える
-        if(this.isSelected)
+        if (this.isSelected)
         {
             GetComponent<SpriteRenderer>().color = selectedColor;
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = new Color(1,1,1,1);
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         }
+    }
+
+    /// <summary>
+    /// 売り切れになったときの処理
+    /// </summary>
+    private void ExecuteSoldOut()
+    {
+
     }
 
     /// <summary>
@@ -94,6 +143,7 @@ public class CardBase : MonoBehaviour
         //一度すべてのカードを非選択状態に
         for (int i=0;i<cardList.Length;i++)
         {
+            if (cardList[i] == null) continue;
             cardList[i].SetIsChosen(false);
         }
         //自分のカードを選択中に。
@@ -111,7 +161,7 @@ public class CardBase : MonoBehaviour
     /// <param name="effect"></param>カードの効果を記述したクラス
     /// <param name="tex"></param>アイコン画像
     public void CardInitialize(string nameText,string effectText,string mouseText, int maxStock, UnityEngine.Events.UnityEvent effect,Sprite tex,
-        float firstSellInADay)
+        float firstSellInADay,int price)
     {
         this.SetNameText(nameText);
         this.SetCardEffectText(effectText);
@@ -120,7 +170,7 @@ public class CardBase : MonoBehaviour
         this.SetCardEffect(effect);
         this.SetCardIconImage(tex);
         this.SetSellInADay(firstSellInADay);
-
+        this.SetPrice(price);
         //ヒントのみ最初は表示しない
         this.mouseOverText.enabled = false;
     }
@@ -130,8 +180,8 @@ public class CardBase : MonoBehaviour
     /// </summary>
     public void OnBoughtCard()
     {
-        //登録してあるメソッドを行う
-        boughtEvent.Invoke();
+        //価格分だけ会社利益になる
+        CompanyInfomation.Instance.AddCompanyMargin(this.price);
     }
 
     /// <summary>
@@ -140,34 +190,48 @@ public class CardBase : MonoBehaviour
     /// </summary>
     public void EndOfTheDay()
     {
-        //1日当たり売れる量がマイナスの場合、処理しない
-        if (this.sellInADay < 0) return;
-        //一日当たり売れる量の増加
-        this.sellInATemp += this.sellInADay;
-        //整数の取得
-        int temp = (int)sellInATemp;
-        //売れた分だけ売れたときの処理を行う
-        for (int i = 0; i < temp; i++)
+        if(this.currentState == CardState.SELLING)
         {
-            OnBoughtCard();
+            //1日当たり売れる量がマイナスの場合、処理しない
+            if (this.sellInADay < 0) return;
+            //一日当たり売れる量の増加
+            this.sellInATemp += this.sellInADay;
+            //整数の取得
+            int temp = (int)sellInATemp;
+            //在庫以上は売れない
+            if (this.currentStock + temp > this.maxStock) temp = this.maxStock - this.currentStock;
+            //売れた分だけ売れたときの処理を行う
+            for (int i = 0; i < temp; i++)
+            {
+                OnBoughtCard();
+            }
+            //小数点以下のみ記録
+            sellInATemp -= temp;
+            //売れた個数を記録
+            this.currentStock += temp;
+
+            //売れた数を表示する
+            this.fadeUpText.SetText("+" + temp.ToString());
+            this.fadeUpText.StartRising();
+
+            //売り切れの処理
+            if (currentStock >= this.maxStock)
+            {
+                //登録してあるメソッドを行う
+                boughtEvent.Invoke();
+                //売り切れ！の表示
+                soldOutImage.StartLerp();
+                //選択中の表記であれば解除する　
+                GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+                //状態を売り切れに
+                this.currentState = CardState.SOLDOUT;
+                //アニメーションを売り切れ時の物に
+                GetComponent<Animator>().SetTrigger("isSoldOut");
+            }
+            //表示個数の設定
+            this.currentStockText.text = this.currentStock.ToString();
         }
-        //小数点以下のみ記録
-        sellInATemp -= temp;
-        //売れた個数を記録
-        this.currentStock += temp;
 
-        //売れた数を表示する
-        this.fadeUpText.SetText("+" + temp.ToString());
-        this.fadeUpText.StartRising();
-
-        //売り切れの処理
-        if (currentStock >= this.maxStock)
-        {
-
-        }
-
-        //表示個数の設定
-        this.currentStockText.text = this.currentStock.ToString();
     }
 
     /// <summary>
@@ -185,8 +249,9 @@ public class CardBase : MonoBehaviour
     /// <param name="effectText"></param>
     public void SetCardEffectText(string effectText)
     {
-        effectText.Replace("<br>", "\n");
-        this.effectText.text = effectText;
+        //売れたら利益がいくら増えるを記述しておく
+        this.effectText.text = "・売れると" + this.price + "円の利益\n";
+        this.effectText.text += effectText;
     }
 
     /// <summary>
@@ -197,7 +262,6 @@ public class CardBase : MonoBehaviour
     {
         this.mouseOverText.text = mouseText;
     }
-
 
     /// <summary>
     /// 現在在庫数の表記を設定するための関数
@@ -279,6 +343,10 @@ public class CardBase : MonoBehaviour
         this.isSelected = flag;
     }
 
+    /// <summary>
+    /// 在庫数の設定を行う
+    /// </summary>
+    /// <param name="val"></param>
     public void SetStock(int val)
     {
         this.maxStock = val;
@@ -300,6 +368,25 @@ public class CardBase : MonoBehaviour
     public int GetCurrentStock()
     {
         return this.currentStock;
+    }
+
+    /// <summary>
+    /// 価格の設定を行う
+    /// </summary>
+    /// <param name="val"></param>
+    /// <returns></returns>
+    public void SetPrice(int val)
+    {
+        this.price = val;
+    }
+
+    /// <summary>
+    /// 価格の取得
+    /// </summary>
+    /// <returns></returns>
+    public int GetPrice()
+    {
+        return this.price;
     }
 
 }
