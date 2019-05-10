@@ -1,0 +1,16 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum Tags 
+{
+    EAT,
+    DRINK,
+    BOOK,
+    STADIE,
+    TOOL,
+    SLAVE,
+    PETS,
+    DRAG,
+    DENGER,
+}
