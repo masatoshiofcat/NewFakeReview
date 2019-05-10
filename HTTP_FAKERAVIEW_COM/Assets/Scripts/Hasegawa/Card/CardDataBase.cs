@@ -55,12 +55,6 @@ public class CardDataBase : ScriptableObject
             {
                 Debug.Log("商品名が無記入!index="+i.ToString());
             }
-
-            if(card.GetStock() <=0)
-            {
-                Debug.Log("在庫数のパラメータエラー!index=" + i.ToString());
-            }
-
             
         }
     }

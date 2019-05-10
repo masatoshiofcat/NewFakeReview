@@ -35,10 +35,7 @@ public class CardData : ScriptableObject
     private UnityEngine.Events.UnityEvent boughtEvents = new UnityEngine.Events.UnityEvent();
 
     [SerializeField]
-    private int stock;//在庫数
-
-    [SerializeField]
-    private float firstSellInADay;//一日当たり売れる量の初期値
+    private float EaseOfSell;//商品の売れやすさ係数
 
     [SerializeField]
     private int price;//価格
@@ -93,14 +90,6 @@ public class CardData : ScriptableObject
     {
         return this.cardEffectText;
     }
-    /// <summary>
-    /// 商品の在庫数の取得
-    /// </summary>
-    /// <returns></returns>
-    public int GetStock()
-    {
-        return this.stock;
-    }
 
     /// <summary>
     /// マウスが上に乗った時表示される文字列の取得
@@ -114,9 +103,9 @@ public class CardData : ScriptableObject
     /// 一日当たり売れる量の初期値を返す
     /// </summary>
     /// <returns></returns>
-    public float GetFirstSellInADay()
+    public float GetEaseOfSell()
     {
-        return this.firstSellInADay;
+        return this.EaseOfSell;
     }
 
     /// <summary>

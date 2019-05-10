@@ -25,10 +25,8 @@ public class StarBottun : MonoBehaviour
         CardBase currentCard = company.GetChosenCard();
         if (currentCard == null) return;
 
-        //カードが売れやすく・売れにくくなる
-        currentCard.AddSellInADay(buttons[starNumber].GetReviewAffect());
-
-        
+        //カードレビューしたよ！
+        currentCard.CardReviewedFunction();
     }
-
+    
 }
