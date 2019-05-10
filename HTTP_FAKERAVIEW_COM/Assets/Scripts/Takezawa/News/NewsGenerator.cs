@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class NewsGenerator : MonoBehaviour
 {
-    [SerializeField]
-    //   GameObject news
+    GameObject news;
 
+    [SerializeField]
+    NewsDataBase effectDataBase;
+
+    private List<NewsData> newsDatas = new List<NewsData>();
     // Start is called before the first frame update
     void Start()
     {
-
+        newsDatas = effectDataBase.DataBase;
     }
 
     // Update is called once per frame

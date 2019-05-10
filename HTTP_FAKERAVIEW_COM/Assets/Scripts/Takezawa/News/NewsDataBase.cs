@@ -9,6 +9,7 @@ public class NewsDataBase : ScriptableObject
     [SerializeField]
     private List<NewsData> newsDataList = new List<NewsData>();
 
+
     /// <summary>
     /// ニュースのデータリストの取得
     /// </summary>
@@ -23,4 +24,5 @@ public class NewsDataBase : ScriptableObject
         this.newsDataList.Add(_newsData);
     }
 
+    public List<NewsData>DataBase{get { return newsDataList; }}
 }
