@@ -10,46 +10,35 @@ using UnityEngine.UI;
 /// </summary>
 public class CardBase : MonoBehaviour
 {
-    enum CardState
-    {
-        APPERARANCE, //登場
-        SELLING,//販売中
-        SOLDOUT,//売り切れの時の処理
-    }
 
 
     [SerializeField]
-    private Text nameText; //商品名を書くためのTextオブジェクト
+    protected Text nameText; //商品名を書くためのTextオブジェクト
 
     [SerializeField]
-    private Text effectText;//商品効果を書くためのTextオブジェクト
+    protected Text effectText;//商品効果を書くためのTextオブジェクト
 
     [SerializeField]
-    private Text mouseOverText;//マウスがアイコンの上に乗った時表示されるヒントを書くためのオブジェクト
+    protected Text mouseOverText;//マウスがアイコンの上に乗った時表示されるヒントを書くためのオブジェクト
 
     [SerializeField]
-    private SpriteRenderer cardIcon;//アイコン画像を変更するためのオブジェクト
+    protected SpriteRenderer cardIcon;//アイコン画像を変更するためのオブジェクト
 
     [SerializeField]
-    private Color selectedColor;//選択中の色
+    protected Color selectedColor;//選択中の色
 
     [SerializeField]
-    private LerpSprite soldOutImage;//売り切れの時表示する画像
+    protected LerpSprite soldOutImage;//売り切れの時表示する画像
 
-    private UnityEngine.Events.UnityEvent boughtEvent;//商品が買われたときの効果を記述したクラス
+    protected UnityEngine.Events.UnityEvent boughtEvent;//商品が買われたときの効果を記述したクラス
 
-    private int price;//価格
-    private float easeOfSell;//この商品の売れやすさ
+    protected int price;//価格
+    protected float easeOfSell;//この商品の売れやすさ
 
-
-    private bool isSelected=false;//このカードが選択中かのフラグ
-    CardState currentState;//現在の状態
 
     // Start is called before the first frame update
     private void Start()
     {
-        //最初は登場から
-        currentState = CardState.SELLING;
     }
 
     /// <summary>
@@ -57,87 +46,6 @@ public class CardBase : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        switch (this.currentState)
-        {
-            case CardState.APPERARANCE:
-                this.ExecuteAppearance();
-                break;
-            case CardState.SELLING:
-                this.ExecuteSelling();
-                break;
-            case CardState.SOLDOUT:
-                this.ExecuteSoldOut();
-                break;
-             default:
-                break;
-        }
-
-    }
-
-    /// <summary>
-    /// 登場時の処理
-    /// </summary>
-    private void ExecuteAppearance()
-    {
-
-    }
-
-    /// <summary>
-    /// 販売中の処理
-    /// </summary>
-    private void ExecuteSelling()
-    {
-        //マウスと接触しているかの判定
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hitData = Physics2D.Raycast(ray.origin, ray.direction, 100f);
-
-        if (hitData)
-        {
-            //重なっているときクリックされたら選択中の切り替え
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (hitData.collider.gameObject == gameObject)
-                {
-                    SwitchChosenCard();
-                }
-
-            }
-        }
-
-        //選択中であれば色を変える
-        if (this.isSelected)
-        {
-            GetComponent<SpriteRenderer>().color = selectedColor;
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-        }
-    }
-
-    /// <summary>
-    /// 売り切れになったときの処理
-    /// </summary>
-    private void ExecuteSoldOut()
-    {
-
-    }
-
-    /// <summary>
-    /// 選択中カードの切り替え
-    /// </summary>
-    private void SwitchChosenCard()
-    {
-        CardBase[] cardList =CompanyInfomation.Instance.GetCardListOnWindow();
-        //一度すべてのカードを非選択状態に
-        for (int i=0;i<cardList.Length;i++)
-        {
-            if (cardList[i] == null) continue;
-            cardList[i].SetIsChosen(false);
-        }
-        //自分のカードを選択中に。
-        this.SetIsChosen(true);
-        CompanyInfomation.Instance.SetChosenCard(gameObject.GetComponent<CardBase>());
 
     }
 
@@ -153,14 +61,16 @@ public class CardBase : MonoBehaviour
         float easeOfSell,int price)
     {
         this.SetNameText(nameText);
-        this.SetCardEffectText(effectText);
+        this.SetPrice(price);
+
+        //売れたら利益がいくら増えるを記述しておく
+        this.effectText.text = "・売れると" + this.price + "円の利益\n";
+        this.AddCardEffectText(effectText);
         this.SetMouseOverText(mouseText);
         this.SetCardEffect(effect);
         this.SetCardIconImage(tex);
         this.SetEaseOfSell(easeOfSell);
-        this.SetPrice(price);
-        //ヒントのみ最初は表示しない
-        this.mouseOverText.enabled = false;
+
     }
 
     /// <summary>
@@ -173,41 +83,6 @@ public class CardBase : MonoBehaviour
     }
 
     /// <summary>
-    /// 一日の終わりの処理を記述。
-    /// 売れたか売れないかの処理を行う。
-    /// </summary>
-    public void EndOfTheDay()
-    {
-        if(this.currentState == CardState.SELLING)
-        {
-        }
-
-    }
-
-
-    /// <summary>
-    /// カードがレビューされたときの処理
-    /// </summary>
-    public void CardReviewedFunction()
-    {
-        //売りに出しているときじゃないと評価できない
-        if(this.currentState == CardState.SELLING)
-        {
-            //登録してあるメソッドを行う
-            boughtEvent.Invoke();
-            //選択中の表記であれば解除する　
-            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-            //売り切れ！の表示
-            soldOutImage.StartLerp();
-            //状態を売り切れに
-            this.currentState = CardState.SOLDOUT;
-            //アニメーションを売り切れ時の物に
-            GetComponent<Animator>().SetTrigger("isSoldOut");
-        }
-
-    }
-
-    /// <summary>
     /// カードの表示名を設定するための関数
     /// </summary>
     /// <param name="nameText"></param>
@@ -217,14 +92,34 @@ public class CardBase : MonoBehaviour
     }
 
     /// <summary>
+    /// 商品名の取得
+    /// </summary>
+    /// <returns></returns>
+    public string GetNameString()
+    {
+        return this.nameText.text;
+    }
+
+    /// <summary>
     /// カード効果の表記を設定するための関数
     /// </summary>
     /// <param name="effectText"></param>
     public void SetCardEffectText(string effectText)
     {
-        //売れたら利益がいくら増えるを記述しておく
-        this.effectText.text = "・売れると" + this.price + "円の利益\n";
+        this.effectText.text = effectText;
+    }
+
+    public void AddCardEffectText(string effectText)
+    {
         this.effectText.text += effectText;
+    }
+
+    /// <summary>
+    /// カード効果の表記を取得する
+    /// </summary>
+    public string GetCardBodyText()
+    {
+        return this.effectText.text;
     }
 
     /// <summary>
@@ -236,6 +131,14 @@ public class CardBase : MonoBehaviour
         this.mouseOverText.text = mouseText;
     }
 
+    /// <summary>
+    /// マウスオーバーされた時表示する文字の取得
+    /// </summary>
+    /// <returns></returns>
+    public string GetMouseOverText()
+    {
+        return this.mouseOverText.text;
+    }
 
     /// <summary>
     /// カードが売れたときの効果を記述したソースの設定
@@ -252,6 +155,14 @@ public class CardBase : MonoBehaviour
     public void SetCardIconImage(Sprite tex)
     {
         this.cardIcon.sprite =tex;
+    }
+    /// <summary>
+    /// カードアイコンの取得
+    /// </summary>
+    /// <returns></returns>
+    public Sprite GetCardIconTex()
+    {
+        return this.cardIcon.sprite;
     }
 
     /// <summary>
@@ -281,22 +192,6 @@ public class CardBase : MonoBehaviour
         return this.easeOfSell;
     }
 
-    /// <summary>
-    /// カードが選択中かを取得する
-    /// </summary>
-    public bool GetIsChosen()
-    {
-        return this.isSelected;
-    }
-
-    /// <summary>
-    /// カードが選択中かを選択する
-    /// </summary>
-    /// <param name="flag"></param>
-    public void SetIsChosen(bool flag)
-    {
-        this.isSelected = flag;
-    }
 
     /// <summary>
     /// 価格の設定を行う
@@ -315,6 +210,17 @@ public class CardBase : MonoBehaviour
     public int GetPrice()
     {
         return this.price;
+    }
+
+    /// <summary>
+    /// この商品のレビュー評価のニュースを流す
+    /// </summary>
+    public void CreateReviewNews()
+    {
+        //レビューを作成する
+        NewsGenerator.Instance.CreateReviewEvalution("テストメッセージ", 100, this);
+        //このオブジェクトは役目を終えた
+        GameObject.Destroy(gameObject);        
     }
 
 }

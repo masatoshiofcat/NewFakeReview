@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d059cfd9b161db4ba40e12fc5df78b4, type: 3}
-  m_Name: CardSoldOutFunction
+  m_Script: {fileID: 11500000, guid: 9d72727dc6493c147ab255cc05364579, type: 3}
+  m_Name: ConstantNewsDataBase
   m_EditorClassIdentifier: 
-  ss: 0
+  newsDataList:
+  - {fileID: 11400000, guid: 956b8b1bb35c7d84b8ed2817d0c165ed, type: 2}

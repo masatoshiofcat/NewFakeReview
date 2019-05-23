@@ -13,21 +13,25 @@ public class CardIcon : MonoBehaviour
     {
         //マウスと接触しているかの判定
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hitData = Physics2D.Raycast(ray.origin, ray.direction, 100f);
+        int layer = LayerMask.NameToLayer("CardIcon");
+        RaycastHit2D hitData = Physics2D.Raycast(ray.origin, ray.direction, 100f,1<< layer);
  
         //マウスと重なっているときのみヒントを表示する
         if (hitData)
         {
             if (hitData.collider.gameObject == gameObject)
             {
-                this.mouseOverText.enabled = true;
+
+                this.mouseOverText.gameObject.SetActive(true);
             }
         }
         else
         {
-            this.mouseOverText.enabled = false;
+            this.mouseOverText.gameObject.SetActive(false);
 
         }
+
+
 
     }
 }

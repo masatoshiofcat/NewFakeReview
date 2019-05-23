@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// カードを売り切った時発生させたいイベントの処理を記述するクラス
+/// カードを売り切った時やニュースの出現時など、発生させたいイベントの処理を記述するクラス
 /// 引数は１つまで。それ以上のイベントを記述したい場合、要相談
 /// </summary>
-[CreateAssetMenu(fileName = "CardSoldOutFunction", menuName = "CreateCardSoldOutFunction")]
-public class CardFunctions : ScriptableObject
+[CreateAssetMenu(fileName = "eventFunction", menuName = "CreateEventFunction")]
+public class EventFunctions : ScriptableObject
 {
     //会社の持つデータのインスタンス
     private CompanyInfomation company;

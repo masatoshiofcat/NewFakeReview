@@ -30,10 +30,8 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     private int dayElapsed = 0;//経過日数
     private int companyMargin = 0;//総利益
 
-    private CardBase[] cardsOnWindow = new CardBase[6];//表示されているカード
-    private CardBase currentChosenCard;//現在選択中のカード
-
-
+    private ProductCard[] cardsOnWindow = new ProductCard[6];//表示されているカード
+    private ProductCard currentChosenCard;//現在選択中のカード
 
     private float currentTimeCount = 0;//時を進めるためのタイマー
 
@@ -162,7 +160,7 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     /// <summary>
     /// 表示されているカードリストの取得
     /// </summary>
-    public CardBase[] GetCardListOnWindow()
+    public ProductCard[] GetCardListOnWindow()
     {
         return this.cardsOnWindow;
     }
@@ -171,7 +169,7 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     /// 現在選択中のカードの取得
     /// </summary>
     /// <returns></returns>
-    public CardBase GetChosenCard()
+    public ProductCard GetChosenCard()
     {
         return this.currentChosenCard;
     }
@@ -180,7 +178,7 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     /// 現在選択中カードの設定
     /// </summary>
     /// <param name="card"></param>
-    public void SetChosenCard(CardBase card)
+    public void SetChosenCard(ProductCard card)
     {
         this.currentChosenCard = card;
     }

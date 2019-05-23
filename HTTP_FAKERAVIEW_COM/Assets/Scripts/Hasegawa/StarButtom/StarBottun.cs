@@ -22,7 +22,7 @@ public class StarBottun : MonoBehaviour
         //会社情報の取得
         CompanyInfomation company = CompanyInfomation.Instance;
         //選択中カードを取得
-        CardBase currentCard = company.GetChosenCard();
+        ProductCard currentCard = company.GetChosenCard();
         if (currentCard == null) return;
 
         //カードレビューしたよ！

@@ -60,7 +60,7 @@ public class CardGenerator : MonoBehaviour
         card.GetComponent<CardBase>().CardInitialize(cardData.GetCardName(), cardData.GetCardEffectText(),cardData.GetMouseOverString(), cardData.GetCardEffect(), GetIconSpriteFromCardKind(cardData)
             ,cardData.GetEaseOfSell(),cardData.GetPrice());
 
-        //!カードの座標を決定
+        //カードの座標を決定
         card.transform.position = DecisionCardPosition(i);
 
         //カードを保持しておく
