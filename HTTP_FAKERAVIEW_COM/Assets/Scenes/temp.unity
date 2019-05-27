@@ -530,9 +530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5d184870ae1af4cb32465b67fc1e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  news: {fileID: 0}
-  effectDataBase: {fileID: 0}
-  newsDatas: []
 --- !u!1 &941044918
 GameObject:
   m_ObjectHideFlags: 0
