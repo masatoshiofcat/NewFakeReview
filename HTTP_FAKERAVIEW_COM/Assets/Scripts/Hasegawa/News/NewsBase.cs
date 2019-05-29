@@ -17,6 +17,7 @@ public class NewsBase : MonoBehaviour
     private Text newsHeadText;//ニュースのタイトル用テキストオブジェクト
     private Text newsBodyText;//ニュースの本文用テキストオブジェクト
     private Text reviewText;//レビューを記述するためのテキストオブジェクト
+    private Image newsIcon;//ニュースアイコンを変更するためのオブジェクト
 
     private Vector3 goalPosition;//補間移動用の座標
     private CanvasGroup canvasGroup;//ニュースをフェードアウトさせるためのコンポーネント
@@ -26,10 +27,9 @@ public class NewsBase : MonoBehaviour
         this.newsHeadText = transform.Find("NewsHeadText").GetComponent<Text>();
         this.newsBodyText = transform.Find("NewsBodyText").GetComponent<Text>();
         this.reviewText = transform.Find("ReviewComment").GetComponent<Text>();
+        this.newsIcon = transform.Find("NewsIcon").GetComponent<Image>();
         //コンポーネントの取得
         this.canvasGroup = GetComponent<CanvasGroup>();
-        //登場のアニメーションを行う
-
     }
 
     // Update is called once per frame
@@ -38,8 +38,7 @@ public class NewsBase : MonoBehaviour
         float step = Time.deltaTime * this.lerpSpeed;
         //移動する
         this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, this.goalPosition, step);
-        Debug.Log("pos="+transform.position);
- //       Debug.Log("goal=" + this.goalPosition);
+
         //高さ制限を超えたらフェードアウトする
         if(GetComponent<RectTransform>().position.y > this.maxHeight)
         {
@@ -80,6 +79,11 @@ public class NewsBase : MonoBehaviour
         this.reviewText.text = str;
     }
 
+    //アイコンの変更
+    public void SetNewsIcon(Sprite sprite)
+    {
+        this.newsIcon.sprite = sprite;
+    }
 
     /// <summary>
     /// 補間の目標点の設定

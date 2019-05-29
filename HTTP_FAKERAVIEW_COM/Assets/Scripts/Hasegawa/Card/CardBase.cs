@@ -10,8 +10,6 @@ using UnityEngine.UI;
 /// </summary>
 public class CardBase : MonoBehaviour
 {
-
-
     [SerializeField]
     protected Text nameText; //商品名を書くためのTextオブジェクト
 

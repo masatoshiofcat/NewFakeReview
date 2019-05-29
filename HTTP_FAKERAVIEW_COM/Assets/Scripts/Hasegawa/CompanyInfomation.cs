@@ -35,6 +35,7 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
 
     private float currentTimeCount = 0;//時を進めるためのタイマー
 
+    private Text currentReviewComment;//現在表示されてるレビューコメント
 
     // Start is called before the first frame update
     void Start()
@@ -183,5 +184,24 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
         this.currentChosenCard = card;
     }
 
+
+    /// <summary>
+    /// 現在画面に書いてあるレビューコメントの設定
+    /// </summary>
+    /// <param name="text"></param>
+    public void SetCurrentReviewCommentText(Text text)
+    {
+        this.currentReviewComment = text;
+    }
+
+    /// <summary>
+    /// 現在画面に書いてあるレビューコメントの取得
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    public Text GetCurrentReviewCommentText()
+    {
+        return this.currentReviewComment;
+    }
 
 }

@@ -11,9 +11,11 @@ public class NewsData : ScriptableObject
     /// </summary>
     public enum NewsKind
     {
-        MARGINE,//利益にまつわる
-        DEFICIT,//赤字、よくないニュース
-
+        TUTLIAL,
+        WOLRD_NEWS,
+        MONEY,
+        DENGER,
+        QUESTION,
     }
 
     [SerializeField]

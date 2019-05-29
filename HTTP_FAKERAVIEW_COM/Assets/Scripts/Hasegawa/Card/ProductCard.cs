@@ -143,6 +143,12 @@ public class ProductCard : CardBase
             this.currentState = CardState.SOLDOUT;
             //アニメーションを売り切れ時の物に
             this.animator.SetTrigger("isSoldOut");
+
+            //レビューコメントを張り付ける
+           // CompanyInfomation.Instance.GetCurrentReviewCommentText().transform.SetParent(this.transform);
+
+
+
         }
 
     }
