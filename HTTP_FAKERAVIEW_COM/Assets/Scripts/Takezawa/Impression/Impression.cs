@@ -1,26 +1,37 @@
-﻿using System.Collections;
+﻿//////////
+// 感想 //
+//////////
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using System;
 
 
 public class Impression : MonoBehaviour
 {
-    Text impression;
+    public string text = "";
 
-    List<Tags> tag = new List<Tags>();
-    
+    public List<Shared.Tags> tags = new List<Shared.Tags>();
+    bool tag_flag = false;
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    public Impression() { }
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+
     }
+
+    public void SetData(string _text, List<Shared.Tags> _tags) { text = _text;tags = _tags; } 
+    public string Text { get { return text; } set { text = value; } }
+    public List<Shared.Tags> Tags { get { return tags; } set { tags = value; } }
+    public bool TagViewFlag { get { return tag_flag; } set { tag_flag = value; } }
+    public void AddTags(Shared.Tags tag) { tags.Add(tag); }
 }
