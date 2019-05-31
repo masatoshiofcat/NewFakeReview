@@ -14,8 +14,10 @@ namespace Shared
         SLAVE,
         PETS,
         DRAG,
+        TABAKO,
         DENGER,
+        WEAR,
 
-        NON,
+        NOM,
     }
 }

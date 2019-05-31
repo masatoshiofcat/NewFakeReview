@@ -9,12 +9,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "eventFunction", menuName = "CreateEventFunction")]
 public class EventFunctions : ScriptableObject
 {
-    //会社の持つデータのインスタンス
-    private CompanyInfomation company;
-    private void Start()
+
+    private void Awake()
     {
-        //会社のインスタンスの取得
-        this.company = CompanyInfomation.Instance;
+
     }
 
 
@@ -24,7 +22,7 @@ public class EventFunctions : ScriptableObject
     /// <param name="val"></param>
     public void AddMargin(int val)
     {
-        this.company.AddCompanyMargin(val);
+        CompanyInfomation.Instance.AddCompanyMargin(val);
     }
 
     /// <summary>
@@ -33,9 +31,16 @@ public class EventFunctions : ScriptableObject
     /// <param name="val"></param>
     public void AddDay(int val)
     {
-        this.company.AddDayleft(val);
+        CompanyInfomation.Instance.AddDayleft(val);
     }
 
+    public void PlayBGM(int v)
+    {
+        AudioManager.Instance.PlayBGM(v);
+    }
 
-
+    public void PlaySE(int v)
+    {
+        AudioManager.Instance.PlaySE(v);
+    }
 }

@@ -16,6 +16,9 @@ public class ProductCard : CardBase
 
     private bool isSelected = false;//このカードが選択中かのフラグ
 
+    [SerializeField]
+    private GameObject shockEffect;//エフェクトのひな型
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,8 @@ public class ProductCard : CardBase
         currentState = CardState.SELLING;
         //コンポーネントの取得
         animator = GetComponent<Animator>();
+        this.reviewdImpression = gameObject.AddComponent<Impression>();
+
 
     }
 
@@ -66,12 +71,17 @@ public class ProductCard : CardBase
 
         if (hitData)
         {
+            //重なってたら色変える
+
+
             //重なっているときクリックされたら選択中の切り替え
             if (Input.GetMouseButtonDown(0))
             {
                 if (hitData.collider.gameObject == gameObject)
                 {
                     SwitchChosenCard();
+                    //音を鳴らす
+                    AudioManager.Instance.PlaySE(1);
                 }
 
             }
@@ -137,18 +147,29 @@ public class ProductCard : CardBase
             boughtEvent.Invoke();
             //選択中の表記であれば解除する　
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-            //売り切れ！の表示
-            soldOutImage.StartLerp();
             //状態を売り切れに
             this.currentState = CardState.SOLDOUT;
             //アニメーションを売り切れ時の物に
             this.animator.SetTrigger("isSoldOut");
 
-            //レビューコメントを張り付ける
-           // CompanyInfomation.Instance.GetCurrentReviewCommentText().transform.SetParent(this.transform);
+            //現在のレビューを張り付ける
+            this.SetReviewdImpression(CompanyInfomation.Instance.GetCurrentImpression());
 
+            Debug.Log(this.GetReviewdImpression().Text);
+            //新たなレビューの生成
+            ReviewGenerator.Instance.CreateReviewOneFromRandom();
+            Debug.Log(this.GetReviewdImpression().Text);
 
+            //レビューコメントの補間移動を開始させる
+            var reviewText = Instantiate(CompanyInfomation.Instance.GetCurrentReviewCommentText(),this.textCanvas.transform);
+            reviewText.color = Color.white;
+            reviewText.alignment = TextAnchor.MiddleCenter;
+            reviewText.GetComponent<LerpObject>().SetGoalPosition(this.transform.position);
+            reviewText.GetComponent<LerpObject>().SetGoalScale(new Vector3(0.2f,0.2f,0.2f));
+            reviewText.GetComponent<LerpObject>().StartLerp();
 
+            //レビューカウントを増やす
+            MissionManager.Instance.CountReview();
         }
 
     }
@@ -168,6 +189,12 @@ public class ProductCard : CardBase
     public void SetIsChosen(bool flag)
     {
         this.isSelected = flag;
+    }
+    
+    public void StartShockEffect()
+    {
+        var e =Instantiate(this.shockEffect, transform);
+        e.transform.localPosition = Vector3.zero;
     }
 
 }

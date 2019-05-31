@@ -29,6 +29,7 @@ public class FadeUpText : MonoBehaviour
 
     //現在のアルファ値
     private float currentAlpha=1.0f;
+    private Vector3 firstRGB;//初期カラー
     //現在の状態
     private FadeUpState currentState;
 
@@ -39,6 +40,8 @@ public class FadeUpText : MonoBehaviour
 
         //初期位置の記憶
         this.firstPosition = transform.position;
+        //色の記憶
+        this.firstRGB = new Vector3(this.textComponent.color.r, this.textComponent.color.g, this.textComponent.color.b);
 
         //最初は非表示
         this.textComponent.color = new Color(1, 1, 1, 0);
@@ -80,7 +83,7 @@ public class FadeUpText : MonoBehaviour
 
         //色の更新(フェードアウト)
         this.currentAlpha -= this.alphaSpeed;
-        this.textComponent.color = new Color(1, 1, 1, currentAlpha);
+        this.textComponent.color = new Color(this.firstRGB.x, this.firstRGB.y, this.firstRGB.z, currentAlpha);
         //表示されなくなったら消滅
         if (this.currentAlpha <= 0) Disapper();
 
@@ -93,6 +96,7 @@ public class FadeUpText : MonoBehaviour
     /// <param name="str"></param>
     public void SetText(string str)
     {
+        if (this.textComponent == null) this.textComponent = GetComponent<Text>();
         textComponent.text = str;
     }
 
@@ -102,7 +106,7 @@ public class FadeUpText : MonoBehaviour
     public void StartRising()
     {
         //テキストを表示する
-        this.textComponent.color = new Color(1, 1, 1, 1);
+        this.textComponent.color = new Color(this.firstRGB.x, this.firstRGB.y, this.firstRGB.z, 1);
         this.currentAlpha = 1.0f;
         //初期座標に
         this.transform.position = firstPosition;

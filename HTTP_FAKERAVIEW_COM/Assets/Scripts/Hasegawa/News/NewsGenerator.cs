@@ -29,7 +29,15 @@ public class NewsGenerator : SingletonMonoBehaviour<NewsGenerator>
     private float NEWS_INTERVAL = 30;//他ニュースとどれだけ離れるか
 
     [SerializeField]
-    Sprite[] newsIconSprite;
+    private Sprite[] newsIconSprite;
+
+    [SerializeField]
+    private NewsData tutrialNews;
+    [SerializeField]
+    private NewsData compleateTutrialNews;
+
+    [SerializeField]
+    private GameObject coinEffect;
 
     private List<NewsBase> newsListInShown = new List<NewsBase>();//表示しているニュースのリスト
 
@@ -55,11 +63,13 @@ public class NewsGenerator : SingletonMonoBehaviour<NewsGenerator>
     NewsBase CreateNews(string headStr,string bodyStr,NewsData.NewsKind newsKind, string reviewComment="",int frameId=0)
     {
         //ニュースオブジェクトの作成
-        NewsBase newsCreating = new NewsBase();
+        NewsBase newsCreating = this.newsFrame;
+        float createOffset = 0.0f;
         switch(frameId)
         {
             case 0:
                 newsCreating = this.newsFrame;
+                createOffset = -20.0f;
                 break;
             case 1:
                 newsCreating= this.reviewCommentFrame;
@@ -71,22 +81,23 @@ public class NewsGenerator : SingletonMonoBehaviour<NewsGenerator>
         //ワールド座標のキャンバスに生成
         news.transform.SetParent(gameObject.transform);
         //ニュースの座標の設定
-        news.transform.localPosition = this.createPosition;
+        news.transform.localPosition = this.createPosition + new Vector3(0, createOffset,0);
         //ニュースを等倍に調整
         news.transform.localScale = new Vector3(1, 1, 1);
         //ニュースの補間先の設定
-        news.SetLerpGoalPosition(this.newsFirstLerpedPosition);
+        news.SetLerpGoalPosition(this.newsFirstLerpedPosition + new Vector3(0, createOffset, 0));
         //ニュースのパラメータ設定
         news.SetHeadText(headStr);
         news.SetBodyText(bodyStr);
-        news.SetReviewComment(reviewComment);
+        if(reviewComment != "") news.SetReviewComment(reviewComment);
+
 
         //ニュースの種類からアイコン画像を決定
         news.SetNewsIcon(this.DecideNewsIconFromNewsKind(newsKind));
 
         //全てのニュースをせり上げる
         this.UpNews(news.GetComponent<RectTransform>().sizeDelta.y - this.NEWS_INTERVAL);
-
+        Debug.Log(news.GetComponent<RectTransform>().sizeDelta.y);
         //管理リストに登録
         this.newsListInShown.Add(news);
 
@@ -108,7 +119,7 @@ public class NewsGenerator : SingletonMonoBehaviour<NewsGenerator>
     public void CreateReviewEvalution(string yourReview,int customer,CardBase productCard)
     {
         //ニュースの生成
-        var news = CreateNews("あなたのレビュー:",customer.ToString()+"人がこれを見て購入しました。",NewsData.NewsKind.MONEY,yourReview,1);
+        var news = CreateNews("あなたのレビュー:",customer.ToString()+"人がこれを見て購入しました。",NewsData.NewsKind.REVIEW,yourReview,1);
 
 
         //利益を計算し、マージンに加える
@@ -126,7 +137,12 @@ public class NewsGenerator : SingletonMonoBehaviour<NewsGenerator>
         card.transform.SetParent(news.transform);
         card.transform.localPosition = this.newsOffest;
 
-
+        //売り上げが存在したらエフェクトを出す
+        if(productCard.GetPrice() * customer>0)
+        {
+            var temp = Instantiate(this.coinEffect, card.transform);
+            temp.transform.localPosition = Vector3.zero;
+        }
     }
 
     /// <summary>
@@ -143,6 +159,23 @@ public class NewsGenerator : SingletonMonoBehaviour<NewsGenerator>
     } 
 
 
+    public void CreateNewsFromDatas(NewsData data)
+    {
+        //ニュースの生成
+        this.CreateNews(data.GetNewsTitle(), data.GetBodyText(), data.GetNewskKind());
+        //ニュースイベントの実行
+        data.GetNewsEvect().Invoke();
+    }
+
+    public void CreateTutrialNews()
+    {
+        this.CreateNewsFromDatas(this.tutrialNews);
+    }
+
+    public void CompleateTutrial()
+    {
+        this.CreateNewsFromDatas(this.compleateTutrialNews);
+    }
 
     private Sprite DecideNewsIconFromNewsKind(NewsData.NewsKind kind)
     {

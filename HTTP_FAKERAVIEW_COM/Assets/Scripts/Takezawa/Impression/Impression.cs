@@ -14,10 +14,6 @@ public class Impression : MonoBehaviour
 
     public List<Shared.Tags> tags = new List<Shared.Tags>();
     bool tag_flag = false;
-    /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    public Impression() { }
 
     private void Start()
     {

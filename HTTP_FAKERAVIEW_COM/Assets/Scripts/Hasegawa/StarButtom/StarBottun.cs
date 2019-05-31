@@ -27,6 +27,8 @@ public class StarBottun : MonoBehaviour
 
         //カードレビューしたよ！
         currentCard.CardReviewedFunction();
+        //音を鳴らす
+        AudioManager.Instance.PlaySE(1);
     }
     
 }
