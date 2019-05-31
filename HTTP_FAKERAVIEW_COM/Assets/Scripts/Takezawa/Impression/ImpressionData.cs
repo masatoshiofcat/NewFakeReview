@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
 using UnityEditor;
-#endif
+//#endif
 
 [Serializable]
 [CreateAssetMenu(fileName = "ImpressData", menuName = "Impress")]
