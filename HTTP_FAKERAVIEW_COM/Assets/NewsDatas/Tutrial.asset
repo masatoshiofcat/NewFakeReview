@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a602d4526632c4d4c80b3a487834d2c8, type: 3}
+  m_Name: Tutrial
+  m_EditorClassIdentifier: 
+  newsTitle: "\u3088\u3046\u3053\u305D"
+  bodyText: "\u307E\u305A\u306F\u4ECA\u98DB\u3093\u3067\u304D\u305F\u5546\u54C1\u3092\u3069\u308C\u304B\u30AF\u30EA\u30C3\u30AF\u3057\u307E\u3057\u3087\u3046\u3002\n\u305D\u3057\u3066[\u6295\u7A3F]\u30DC\u30BF\u30F3\u3092\u62BC\u3057\u3066\u307F\u307E\u3057\u3087\u3046\uFF01"
+  newsKind: 0
+  appearEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8a80bcf23b2a2e0499b3c99ba818f371, type: 2}
+        m_MethodName: PlaySE
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec2d5f95cbbc5946a09841fb3b61dfa, type: 3}
+  m_Name: newClear
+  m_EditorClassIdentifier: 
+  iconTag: 9
+  cardName: ICBM
+  cardTag: 0300000009000000
+  boughtEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  EaseOfSell: 1
+  price: 8900000
+  cardEffectText: "\u5927\u9678\u9593\u5F3E\u9053\u30DF\u30B5\u30A4\u30EB\u3002\u5317\u30A2\u30E1\u30EA\u30AB\u5927\u9678\u304B\u3089\u30E6\u30FC\u30E9\u30B7\u30A2\u5927\u9678\u3092\u72D9\u3046\u3053\u3068\u304C\u3067\u304D\u308B"
+  mouseOverText: "\u7D50\u8AD6"

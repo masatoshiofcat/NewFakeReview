@@ -7,29 +7,15 @@ using System;
 [CreateAssetMenu(fileName = "Card",menuName ="CreateCard")]
 public class CardData : ScriptableObject
 {
-    //カードの種類。主にこれによってイラストが変わる
-    public enum KindOfCard
-    {
-        BOOK,
-        DISC, //CDやDVDがこれにあたる
-        HOBBY //主に玩具
-    }
-
-    //カードのタグ。
-    public enum TagOfCard
-    {
-        NARD, //オタク
-        YOUNG, //若者
-    }
 
     [SerializeField]
-    private KindOfCard kind;//カードの種類
+    private Shared.Tags iconTag;//カードの種類　これで画像を変える
 
     [SerializeField]
     private string cardName;//商品名
 
     [SerializeField]
-    private TagOfCard[] cardTag;//商品についているタグ
+    private Shared.Tags[] cardTag;//商品についているタグ
 
     [SerializeField]
     private UnityEngine.Events.UnityEvent boughtEvents = new UnityEngine.Events.UnityEvent();
@@ -50,9 +36,9 @@ public class CardData : ScriptableObject
     /// 商品の種類の取得
     /// </summary>
     /// <returns></returns>
-    public KindOfCard GetKind()
+    public Shared.Tags GetKind()
     {
-        return this.kind;
+        return this.iconTag;
     }
 
     /// <summary>
@@ -68,7 +54,7 @@ public class CardData : ScriptableObject
     /// 商品についているタグの取得
     /// </summary>
     /// <returns></returns>
-    public TagOfCard[] GetCardTag()
+    public Shared.Tags[] GetCardTag()
     {
         return this.cardTag;
     }

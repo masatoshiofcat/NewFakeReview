@@ -26,18 +26,12 @@ public class LerpObject : MonoBehaviour
     protected Vector3 goalScale;//シーンウィンドウ上での拡大率及び補間後の拡大率
 
     //現在の状態
-    protected LerpState currentState;
+    protected LerpState currentState = LerpState.DISAPPER;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        //初期座標の記録
-        this.goalPosition = this.transform.position;
-        //回転の記録
-        this.goalRotation = this.transform.eulerAngles;
-        //拡大率の記録
-        this.goalScale = this.transform.localScale;
-        currentState = LerpState.DISAPPER;
+
     }
 
     // Update is called once per frame
@@ -61,7 +55,8 @@ public class LerpObject : MonoBehaviour
     /// 補間移動する処理
     /// </summary>
     protected virtual void ExecuteLerp()
-    {        //速度の算出
+    {
+        //速度の算出
         float step = Time.deltaTime * this.lerpSpeed;
         //移動する
         this.transform.position = Vector3.Lerp(this.transform.position, this.goalPosition, step);
@@ -96,4 +91,13 @@ public class LerpObject : MonoBehaviour
         this.currentState = LerpState.LERPING;
     }
 
+    public void SetGoalPosition(Vector3 pos)
+    {
+        this.goalPosition = pos;
+    }
+
+    public void SetGoalScale(Vector3 sca)
+    {
+        this.goalScale = sca;
+    }
 }

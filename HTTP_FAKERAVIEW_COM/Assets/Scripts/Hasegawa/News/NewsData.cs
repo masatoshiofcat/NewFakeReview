@@ -13,9 +13,8 @@ public class NewsData : ScriptableObject
     {
         TUTLIAL,
         WOLRD_NEWS,
-        MONEY,
         DENGER,
-        QUESTION,
+        REVIEW,
     }
 
     [SerializeField]

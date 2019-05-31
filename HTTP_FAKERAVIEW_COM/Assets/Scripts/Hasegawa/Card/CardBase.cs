@@ -11,6 +11,8 @@ using UnityEngine.UI;
 public class CardBase : MonoBehaviour
 {
     [SerializeField]
+    protected Canvas textCanvas;//テキストオブジェクトを格納するためのcanvas
+    [SerializeField]
     protected Text nameText; //商品名を書くためのTextオブジェクト
 
     [SerializeField]
@@ -32,11 +34,13 @@ public class CardBase : MonoBehaviour
 
     protected int price;//価格
     protected float easeOfSell;//この商品の売れやすさ
-
+    private Shared.Tags[] cardTag;//この商品のタグ
+    protected Impression reviewdImpression;//このカードについたレビュー
 
     // Start is called before the first frame update
     private void Start()
     {
+        this.reviewdImpression=gameObject.AddComponent<Impression>();
     }
 
     /// <summary>
@@ -56,7 +60,7 @@ public class CardBase : MonoBehaviour
     /// <param name="effect"></param>カードの効果を記述したクラス
     /// <param name="tex"></param>アイコン画像
     public void CardInitialize(string nameText,string effectText,string mouseText,UnityEngine.Events.UnityEvent effect,Sprite tex,
-        float easeOfSell,int price)
+        float easeOfSell,int price,Shared.Tags[] tags)
     {
         this.SetNameText(nameText);
         this.SetPrice(price);
@@ -68,7 +72,12 @@ public class CardBase : MonoBehaviour
         this.SetCardEffect(effect);
         this.SetCardIconImage(tex);
         this.SetEaseOfSell(easeOfSell);
+        this.SetCardTags(tags);
 
+    }
+    public void SetCardTags(Shared.Tags[] tags)
+    {
+        this.cardTag = tags;
     }
 
     /// <summary>
@@ -216,9 +225,60 @@ public class CardBase : MonoBehaviour
     public void CreateReviewNews()
     {
         //レビューを作成する
-        NewsGenerator.Instance.CreateReviewEvalution("テストメッセージ", 100, this);
+        NewsGenerator.Instance.CreateReviewEvalution(this.reviewdImpression.Text, this.CalcBenefit(), this);
+
+        Destroy(this.soldOutImage);
+        Destroy(this.reviewdImpression);
         //このオブジェクトは役目を終えた
         GameObject.Destroy(gameObject);        
+    }
+
+    /// <summary>
+    /// この商品の購入人数を計算する
+    /// </summary>
+    /// <returns></returns>
+    public int CalcBenefit()
+    {
+        //レビューを見た人数を計算
+        float customerSawReview = CompanyInfomation.Instance.GetCustomer() * (this.easeOfSell / 100);
+
+        //レビューがどれだけ当てはまったかを数える
+        float critical = 0;
+        for(int i=0;i<this.cardTag.Length; ++i)
+        {
+            for(int j=0;j<this.reviewdImpression.Tags.Count;++j)
+            {
+                if (this.cardTag[i] == this.reviewdImpression.Tags[j]) critical++;
+            }
+        }
+
+        //レビューの精度を計算
+        float reviewCrticalPercent = (critical / (float)cardTag.Length) * customerSawReview;
+
+        return (int)(reviewCrticalPercent);
+
+    }
+
+    /// <summary>
+    /// 評価をつける
+    /// </summary>
+    /// <param name="review"></param>
+    public void SetReviewdImpression(Impression review)
+    {
+        this.reviewdImpression.Text = review.Text;
+        this.reviewdImpression.Tags = review.Tags;
+    }
+
+    public Impression GetReviewdImpression()
+    {
+        return this.reviewdImpression;
+    }
+
+    public void StartReviwedLerp()
+    {
+        //レビュー完了！を動かす
+        soldOutImage.StartLerp();
+
     }
 
 }

@@ -26,7 +26,7 @@ public class NewsBase : MonoBehaviour
     {
         this.newsHeadText = transform.Find("NewsHeadText").GetComponent<Text>();
         this.newsBodyText = transform.Find("NewsBodyText").GetComponent<Text>();
-        this.reviewText = transform.Find("ReviewComment").GetComponent<Text>();
+  //      this.reviewText = transform.Find("ReviewComment").GetComponent<Text>();
         this.newsIcon = transform.Find("NewsIcon").GetComponent<Image>();
         //コンポーネントの取得
         this.canvasGroup = GetComponent<CanvasGroup>();
@@ -76,6 +76,8 @@ public class NewsBase : MonoBehaviour
 
     public void SetReviewComment(string str)
     {
+        if(this.reviewText == null) this.reviewText = transform.Find("ReviewComment").GetComponent<Text>();
+
         this.reviewText.text = str;
     }
 

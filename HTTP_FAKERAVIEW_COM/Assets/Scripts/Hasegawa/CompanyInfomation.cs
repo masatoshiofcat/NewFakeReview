@@ -25,7 +25,16 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     private Text marginText;//利益を書くためのテキスト
 
     [SerializeField]
+    private int customer;//このサイトの閲覧者数
+
+    [SerializeField]
     CardGenerator cardGenerator;//カード生成器
+
+    [SerializeField]
+    private Text currentReviewCommentText;//現在表示されてるレビューコメント
+
+    [SerializeField]
+    private FadeUpText fadeUpText;//上昇しながら消えていくテキストオブジェクト
 
     private int dayElapsed = 0;//経過日数
     private int companyMargin = 0;//総利益
@@ -35,13 +44,19 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
 
     private float currentTimeCount = 0;//時を進めるためのタイマー
 
-    private Text currentReviewComment;//現在表示されてるレビューコメント
+    private Impression currentImpression;//現在のレビューコメント
+    private int dayCount = 0;
+
+    private bool bgmcahnged = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        //カードに空きがあれば作成する
-        this.cardGenerator.CardGenerate();
+        this.currentImpression = GetComponent<Impression>();
+        //カードを6枚生成する
+        this.cardGenerator.Generate6Card();
+        //レビューの生成
+        ReviewGenerator.Instance.CreateTutrialReview();
 
     }
 
@@ -80,22 +95,55 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
             this.cardsOnWindow[i].EndOfTheDay();
         }
 
+        //閲覧者数の増加
+        this.IncreaseCustomer();
         //日にちの経過
         this.dayElapsed++;
         this.dayLeft--;
+        this.dayCount++;
+
+        //チュートリアルの処理
+        if (this.dayCount == 2) NewsGenerator.Instance.CreateTutrialNews();
+        //ＢＧＭ変更の処理
+        if(!this.bgmcahnged)
+        {
+            if (this.dayLeft == 30) AudioManager.Instance.PlayBGM(2);
+        }
+
     }
 
     //テキスト描画情報の更新
     private void UpdateText()
     {
         //残り日数表示の更新
-        this.dayLeftTextObject.text = "あと" + this.dayLeft.ToString() + "日";
+        this.dayLeftTextObject.text = "倒産まで" + this.dayLeft.ToString() + "日";
         //利益の更新
         this.marginText.text = this.companyMargin.ToString() + "円";
+        //表示しているレビューコメントの更新
+        if (this.currentImpression == null) return;
+        this.currentReviewCommentText.text = this.currentImpression.Text;
+    }
 
+    /// <summary>
+    /// 閲覧者数の増加
+    /// </summary>
+
+    private void IncreaseCustomer()
+    {
+        this.customer += Random.Range(0, 100);
     }
 
     //GetterとSetterの数々=================================================
+
+    public int GetCustomer()
+    {
+        return this.customer;
+    }
+
+    public void SetCustomer(int val)
+    {
+        this.customer += val;
+    }
 
     /// <summary>
     /// 残り日数の取得
@@ -120,6 +168,10 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     public void AddDayleft(int value)
     {
         this.dayLeft += value;
+        //テキストを上昇させていく
+  //      var fadeUp = Instantiate(this.fadeUpText,this.dayLeftTextObject.transform);
+        this.fadeUpText.SetText("+" + value);
+        this.fadeUpText.StartRising();
     }
 
     /// <summary>
@@ -191,7 +243,7 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     /// <param name="text"></param>
     public void SetCurrentReviewCommentText(Text text)
     {
-        this.currentReviewComment = text;
+        this.currentReviewCommentText = text;
     }
 
     /// <summary>
@@ -201,7 +253,19 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     /// <returns></returns>
     public Text GetCurrentReviewCommentText()
     {
-        return this.currentReviewComment;
+        return this.currentReviewCommentText;
     }
+
+    public Impression GetCurrentImpression()
+    {
+        return this.currentImpression;
+    }
+    public void SetCurrentImpression(ImpressionData data)
+    {
+        this.currentImpression.Text = data.Text;
+        this.currentImpression.Tags = data.Tags;
+    }
+
+
 
 }
