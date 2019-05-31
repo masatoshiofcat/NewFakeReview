@@ -34,9 +34,10 @@ public class ReviewGenerator : SingletonMonoBehaviour<ReviewGenerator>
     /// </summary>
     public void CreateReviewOneFromRandom()
     {
-        CompanyInfomation.Instance.SetCurrentImpression(reviewList[Random.Range(0, reviewList.Count)]);
+        var review = reviewList[Random.Range(0, reviewList.Count - 1)];
+        if (review == null) Debug.Log("アッ");
+        CompanyInfomation.Instance.SetCurrentImpression(review);
     }
-
     public void CreateTutrialReview()
     {
         CompanyInfomation.Instance.SetCurrentImpression(this.tutrialReview);

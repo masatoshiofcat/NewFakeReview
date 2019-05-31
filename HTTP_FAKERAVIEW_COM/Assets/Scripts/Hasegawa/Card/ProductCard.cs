@@ -154,11 +154,9 @@ public class ProductCard : CardBase
 
             //現在のレビューを張り付ける
             this.SetReviewdImpression(CompanyInfomation.Instance.GetCurrentImpression());
-
-            Debug.Log(this.GetReviewdImpression().Text);
             //新たなレビューの生成
             ReviewGenerator.Instance.CreateReviewOneFromRandom();
-            Debug.Log(this.GetReviewdImpression().Text);
+
 
             //レビューコメントの補間移動を開始させる
             var reviewText = Instantiate(CompanyInfomation.Instance.GetCurrentReviewCommentText(),this.textCanvas.transform);
@@ -193,8 +191,9 @@ public class ProductCard : CardBase
     
     public void StartShockEffect()
     {
-        var e =Instantiate(this.shockEffect, transform);
-        e.transform.localPosition = Vector3.zero;
+        var eff =EffekseerSystem.PlayEffect("Shock", transform.position);
+
+        eff.SetScale(new Vector3(0.4f, 0.3f, 0.3f));
     }
 
 }

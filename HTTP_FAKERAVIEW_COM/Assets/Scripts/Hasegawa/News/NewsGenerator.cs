@@ -97,7 +97,7 @@ public class NewsGenerator : SingletonMonoBehaviour<NewsGenerator>
 
         //全てのニュースをせり上げる
         this.UpNews(news.GetComponent<RectTransform>().sizeDelta.y - this.NEWS_INTERVAL);
-        Debug.Log(news.GetComponent<RectTransform>().sizeDelta.y);
+
         //管理リストに登録
         this.newsListInShown.Add(news);
 
@@ -140,8 +140,11 @@ public class NewsGenerator : SingletonMonoBehaviour<NewsGenerator>
         //売り上げが存在したらエフェクトを出す
         if(productCard.GetPrice() * customer>0)
         {
+
             var temp = Instantiate(this.coinEffect, card.transform);
             temp.transform.localPosition = Vector3.zero;
+            //音を鳴らす
+            AudioManager.Instance.PlaySE(0);
         }
     }
 

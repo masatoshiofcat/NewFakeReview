@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+
 using UnityEngine.UI;
 
 
@@ -77,3 +79,4 @@ public class ImpressionInspector : Editor               // Editorを継承
 
     }
 }
+#endif

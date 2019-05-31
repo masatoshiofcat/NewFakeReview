@@ -12,7 +12,7 @@ public class Impression : MonoBehaviour
 {
     public string text = "";
 
-    public List<Shared.Tags> tags = new List<Shared.Tags>();
+    public List<Shared.ImpressTag> tags = new List<Shared.ImpressTag>();
     bool tag_flag = false;
 
     private void Start()
@@ -25,9 +25,9 @@ public class Impression : MonoBehaviour
 
     }
 
-    public void SetData(string _text, List<Shared.Tags> _tags) { text = _text;tags = _tags; } 
+    public void SetData(string _text, List<Shared.ImpressTag> _tags) { text = _text;tags = _tags; } 
     public string Text { get { return text; } set { text = value; } }
-    public List<Shared.Tags> Tags { get { return tags; } set { tags = value; } }
+    public List<Shared.ImpressTag> Tags { get { return tags; } set { tags = value; } }
     public bool TagViewFlag { get { return tag_flag; } set { tag_flag = value; } }
-    public void AddTags(Shared.Tags tag) { tags.Add(tag); }
+    public void AddTags(Shared.ImpressTag tag) { tags.Add(tag); }
 }

@@ -49,10 +49,15 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
 
     private bool bgmcahnged = false;
 
+    private void Awake()
+    {
+        this.currentImpression = GetComponent<Impression>();
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        this.currentImpression = GetComponent<Impression>();
         //カードを6枚生成する
         this.cardGenerator.Generate6Card();
         //レビューの生成
@@ -262,6 +267,9 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
     }
     public void SetCurrentImpression(ImpressionData data)
     {
+        if (this.currentReviewCommentText == null) Debug.Log("ごみ");
+        if (data == null) Debug.Log("ddddddd");
+
         this.currentImpression.Text = data.Text;
         this.currentImpression.Tags = data.Tags;
     }

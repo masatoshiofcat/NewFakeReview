@@ -34,7 +34,7 @@ public class CardBase : MonoBehaviour
 
     protected int price;//価格
     protected float easeOfSell;//この商品の売れやすさ
-    private Shared.Tags[] cardTag;//この商品のタグ
+    private Shared.ImpressTag[] cardTag;//この商品のタグ
     protected Impression reviewdImpression;//このカードについたレビュー
 
     // Start is called before the first frame update
@@ -60,7 +60,7 @@ public class CardBase : MonoBehaviour
     /// <param name="effect"></param>カードの効果を記述したクラス
     /// <param name="tex"></param>アイコン画像
     public void CardInitialize(string nameText,string effectText,string mouseText,UnityEngine.Events.UnityEvent effect,Sprite tex,
-        float easeOfSell,int price,Shared.Tags[] tags)
+        float easeOfSell,int price,Shared.ImpressTag[] tags)
     {
         this.SetNameText(nameText);
         this.SetPrice(price);
@@ -75,7 +75,7 @@ public class CardBase : MonoBehaviour
         this.SetCardTags(tags);
 
     }
-    public void SetCardTags(Shared.Tags[] tags)
+    public void SetCardTags(Shared.ImpressTag[] tags)
     {
         this.cardTag = tags;
     }

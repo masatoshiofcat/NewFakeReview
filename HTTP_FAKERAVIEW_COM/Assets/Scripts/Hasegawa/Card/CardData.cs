@@ -15,7 +15,7 @@ public class CardData : ScriptableObject
     private string cardName;//商品名
 
     [SerializeField]
-    private Shared.Tags[] cardTag;//商品についているタグ
+    private Shared.ImpressTag[] cardTag;//商品についているタグ
 
     [SerializeField]
     private UnityEngine.Events.UnityEvent boughtEvents = new UnityEngine.Events.UnityEvent();
@@ -54,7 +54,7 @@ public class CardData : ScriptableObject
     /// 商品についているタグの取得
     /// </summary>
     /// <returns></returns>
-    public Shared.Tags[] GetCardTag()
+    public Shared.ImpressTag[] GetCardTag()
     {
         return this.cardTag;
     }

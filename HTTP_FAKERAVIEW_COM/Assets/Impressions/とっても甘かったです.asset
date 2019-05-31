@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa500eacae5557042b2437d19a4bef6a, type: 3}
   m_Name: "\u3068\u3063\u3066\u3082\u7518\u304B\u3063\u305F\u3067\u3059"
   m_EditorClassIdentifier: 
-  text: 
+  text: "\u3068\u3063\u3066\u3082\u7518\u304B\u3063\u305F\u3067\u3059\u3002"
   tags: 

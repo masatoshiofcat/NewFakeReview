@@ -10,28 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ec2d5f95cbbc5946a09841fb3b61dfa, type: 3}
-  m_Name: Card
+  m_Name: Icecream
   m_EditorClassIdentifier: 
   iconTag: 0
-  cardName: 
-  cardTag: 00000000
+  cardName: "\u30A2\u30A4\u30B9\u30AF\u30EA\u30FC\u30E0"
+  cardTag: 0000000009000000
   boughtEvents:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 2816dd2778fe7574dae7d42b008f1b5a, type: 2}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  EaseOfSell: 0
-  price: 0
-  cardEffectText: 
-  mouseOverText: 
+  EaseOfSell: 31
+  price: 98
+  cardEffectText: "\u3064\u3081\u305F\u304F\u3066\u3072\u3093\u3084\u308A\u3057\u305F\u98DF\u3079\u7269\u3002\u5371\u306A\u3044\u85AC\u7269\u3092\u610F\u5473\u3057\u306A\u3044\u3002"
+  mouseOverText: "\u79C1\u306F\u30DF\u30F3\u30C8\u5473\u304C\u597D\u304D\u3067\u3059\u3002"

@@ -20,4 +20,15 @@ namespace Shared
 
         NOM,
     }
+
+    public enum ImpressTag
+    {
+        いいフィット,
+        いい運動,
+
+
+
+
+        NUM,
+    }
 }

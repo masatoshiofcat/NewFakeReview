@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 [Serializable]
 [CreateAssetMenu(fileName = "ImpressData", menuName = "Impress")]
@@ -10,16 +12,16 @@ public class ImpressionData : ScriptableObject
 {
     // 表示させる文字
     public string text;
-    public List<Shared.Tags> tags;
+    public List<Shared.ImpressTag> tags;
 
     bool tag_view_flag = false;
 
     public string Text { get { return text; } set { text = value; } }
-    public List<Shared.Tags> Tags { get { return tags; } set { tags = value; } }
+    public List<Shared.ImpressTag> Tags { get { return tags; } set { tags = value; } }
     public bool TagViewFlag { get { return tag_view_flag; } set { tag_view_flag = value; } }
 
 
-#if UNITY_EDITOR
+
     // Inspector拡張
 
     [CustomEditor(typeof(ImpressionData))]
@@ -42,7 +44,7 @@ public class ImpressionData : ScriptableObject
             serializedObject.Update();
 
             ImpressionData id = target as ImpressionData;
-            List<Shared.Tags> tags = id.Tags;
+            List<Shared.ImpressTag> tags = id.Tags;
 
             EditorGUILayout.LabelField("感想");
             string_property.stringValue = EditorGUILayout.TextArea(string_property.stringValue);
@@ -61,7 +63,7 @@ public class ImpressionData : ScriptableObject
                 for (int i = 0; i < id.tags.Count; i++)
                 {
                     EditorGUILayout.BeginHorizontal();      // 開始
-                    list_property.GetArrayElementAtIndex(i).enumValueIndex = (int)(Shared.Tags)EditorGUILayout.EnumPopup("タグ", (Shared.Tags)Enum.GetValues(typeof(Shared.Tags)).GetValue(list_property.GetArrayElementAtIndex(i).enumValueIndex));
+                    list_property.GetArrayElementAtIndex(i).enumValueIndex = (int)(Shared.ImpressTag)EditorGUILayout.EnumPopup("タグ", (Shared.ImpressTag)Enum.GetValues(typeof(Shared.ImpressTag)).GetValue(list_property.GetArrayElementAtIndex(i).enumValueIndex));
 
                     EditorGUILayout.EndHorizontal();        // 終了
                 }
@@ -74,6 +76,6 @@ public class ImpressionData : ScriptableObject
             serializedObject.ApplyModifiedProperties();
         }
     }
-#endif
+
 }
 

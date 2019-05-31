@@ -720,7 +720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dayLeft: 90
   dayLeftTextObject: {fileID: 941044919}
-  SECOUND_IN_A_DAY: 1
+  SECOUND_IN_A_DAY: 0.8
   marginText: {fileID: 1249793808}
   customer: 100
   cardGenerator: {fileID: 557264101}
@@ -1151,7 +1151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reviewDataBase: {fileID: 11400000, guid: 7d33c94aed91ea14a9805e535bedf079, type: 2}
-  tutrialReview: {fileID: 11400000, guid: c5858a46b618e954d895335c0258839d, type: 2}
+  tutrialReview: {fileID: 11400000, guid: 1553822b9295e1d4da30d5a5db04878f, type: 2}
 --- !u!1 &1204418503
 GameObject:
   m_ObjectHideFlags: 0
