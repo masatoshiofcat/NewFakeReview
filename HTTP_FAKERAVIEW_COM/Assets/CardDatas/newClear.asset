@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconTag: 9
   cardName: ICBM
-  cardTag: 0300000009000000
+  cardTag: 0a000000090000000d0000000b000000
   boughtEvents:
     m_PersistentCalls:
       m_Calls: []

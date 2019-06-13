@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: ConstantNewsDataBase
   m_EditorClassIdentifier: 
   newsDataList:
-  - {fileID: 11400000, guid: 956b8b1bb35c7d84b8ed2817d0c165ed, type: 2}
+  - {fileID: 11400000, guid: ff57ff141de7dfd4d9503a031fe0d4a7, type: 2}
+  - {fileID: 11400000, guid: a80bc4c7bd8f1384ba0deec17c3e6a3d, type: 2}
+  - {fileID: 11400000, guid: 3e0467fdb4c02484dbfbb97aee663fb8, type: 2}
+  - {fileID: 11400000, guid: a79bfdf69d0d33d46a95b6c98f028925, type: 2}

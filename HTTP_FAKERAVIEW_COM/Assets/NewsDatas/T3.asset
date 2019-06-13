@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a602d4526632c4d4c80b3a487834d2c8, type: 3}
+  m_Name: T3
+  m_EditorClassIdentifier: 
+  newsTitle: "\u6226\u4E89\u306E\u5146\u3057\u304B"
+  bodyText: "\u30B3\u30B9\u30BF\u30EA\u30AB\u306F\u4ECA\u65E5\u672A\u660E\u3001\u6838\u306B\u3088\u308B\u6B66\u88C5\u3092\u884C\u3046\u3068\u767A\u8868\u3057\u305F\u3002"
+  newsKind: 2
+  appearEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8a80bcf23b2a2e0499b3c99ba818f371, type: 2}
+        m_MethodName: PlaySE
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

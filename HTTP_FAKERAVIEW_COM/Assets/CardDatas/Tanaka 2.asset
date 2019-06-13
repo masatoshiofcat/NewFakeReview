@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec2d5f95cbbc5946a09841fb3b61dfa, type: 3}
+  m_Name: Tanaka 2
+  m_EditorClassIdentifier: 
+  iconTag: 1
+  cardName: "\u91A4\u6CB9"
+  cardTag: 0700000008000000
+  boughtEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  EaseOfSell: 15
+  price: 280
+  cardEffectText: "\u65E5\u672C\u4EBA\u304C\u611B\u3059\u308B\u9ED2\u3044\u6DB2\u4F53\u8ABF\u5473\u6599\u3002\u3044\u308C\u3059\u304E\u308B\u3068\u5869\u8F9B\u3044\u3002"
+  mouseOverText: "\u3053\u308C\u304C\u4E00\u672C\u3042\u308C\u3070\u6D77\u5916\u3069\u3053\u3067\u3082\u751F\u304D\u3066\u3044\u3051\u308B"

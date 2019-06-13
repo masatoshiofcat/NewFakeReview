@@ -115,6 +115,9 @@ public class CompanyInfomation : SingletonMonoBehaviour<CompanyInfomation>
             if (this.dayLeft == 30) AudioManager.Instance.PlayBGM(2);
         }
 
+        //ニュースの生成
+      //  if (Random.Range(0, 100) < 5) NewsGenerator.Instance.CreateConstantNewsOne();
+
     }
 
     //テキスト描画情報の更新

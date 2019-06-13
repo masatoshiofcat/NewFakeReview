@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconTag: 0
   cardName: "\u30A2\u30A4\u30B9\u30AF\u30EA\u30FC\u30E0"
-  cardTag: 0000000009000000
+  cardTag: 0600000008000000
   boughtEvents:
     m_PersistentCalls:
       m_Calls: []

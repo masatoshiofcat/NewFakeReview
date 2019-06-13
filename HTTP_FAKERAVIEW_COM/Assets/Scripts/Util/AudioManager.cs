@@ -49,7 +49,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         bgmSource.volume = bgmVolums[number];//音量設定
         bgmSource.Stop();
         bgmSource.clip = BGMClips[number];
-        bgmSource.Play();
+     //   bgmSource.Play();
     }
     public void StopBGM()
     {

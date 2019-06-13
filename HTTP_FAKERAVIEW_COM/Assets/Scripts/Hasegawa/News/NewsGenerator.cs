@@ -110,7 +110,7 @@ public class NewsGenerator : SingletonMonoBehaviour<NewsGenerator>
     /// </summary>
     public void CreateConstantNewsOne()
     {
-
+        this.CreateNewsFromDatas(this.newsAbleApear[Random.Range(0, newsAbleApear.Count - 1)]);
     }
 
     /// <summary>
